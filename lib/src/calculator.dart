@@ -5,7 +5,7 @@ abstract class _Calculator {
   const _Calculator();
 
   /// calculates [Rect] of image to fit the screenSize.
-  Rect imageRect(Size screenSize, double imageRatio);
+  Rect imageRect(Size screenSize, double imageRatio, double padding);
 
   /// calculates [Rect] of initial cropping area.
   Rect initialCropRect(
@@ -15,7 +15,8 @@ abstract class _Calculator {
   double scaleToCover(Size screenSize, Rect imageRect);
 
   /// calculates ratio of [targetImage] and [screenSize]
-  double screenSizeRatio(image.Image targetImage, Size screenSize);
+  double screenSizeRatio(
+      image.Image targetImage, Size screenSize, double padding);
 
   /// calculates [Rect] of the result of user moving the cropping area.
   Rect moveRect(Rect original, double deltaX, double deltaY, Rect imageRect) {
@@ -239,8 +240,8 @@ class _HorizontalCalculator extends _Calculator {
   const _HorizontalCalculator();
 
   @override
-  Rect imageRect(Size screenSize, double imageRatio) {
-    final imageScreenHeight = screenSize.width / imageRatio + 36;
+  Rect imageRect(Size screenSize, double imageRatio, double padding) {
+    final imageScreenHeight = screenSize.width / imageRatio + padding;
     final top = (screenSize.height - imageScreenHeight) / 2;
     final bottom = top + imageScreenHeight;
     return Rect.fromLTWH(0, top, screenSize.width, bottom - top);
@@ -272,8 +273,9 @@ class _HorizontalCalculator extends _Calculator {
   }
 
   @override
-  double screenSizeRatio(image.Image targetImage, Size screenSize) {
-    return targetImage.width / (screenSize.width - 72);
+  double screenSizeRatio(
+      image.Image targetImage, Size screenSize, double padding) {
+    return targetImage.width / (screenSize.width - (padding * 2));
   }
 }
 
@@ -281,8 +283,8 @@ class _VerticalCalculator extends _Calculator {
   const _VerticalCalculator();
 
   @override
-  Rect imageRect(Size screenSize, double imageRatio) {
-    final imageScreenWidth = screenSize.height * imageRatio + 36;
+  Rect imageRect(Size screenSize, double imageRatio, double padding) {
+    final imageScreenWidth = screenSize.height * imageRatio + padding;
     final left = (screenSize.width - imageScreenWidth) / 2;
     final right = left + imageScreenWidth;
     return Rect.fromLTWH(left, 0, right - left, screenSize.height);
@@ -314,7 +316,8 @@ class _VerticalCalculator extends _Calculator {
   }
 
   @override
-  double screenSizeRatio(image.Image targetImage, Size screenSize) {
-    return targetImage.height / (screenSize.height - 72);
+  double screenSizeRatio(
+      image.Image targetImage, Size screenSize, double padding) {
+    return targetImage.height / (screenSize.height - (padding * 2));
   }
 }
