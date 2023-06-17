@@ -262,10 +262,10 @@ class _CropEditorState extends State<_CropEditor> {
 
     if (_isFitVertically) {
       baseHeight = MediaQuery.of(context).size.height;
-      baseWidth = baseHeight / ratio;
+      baseWidth = baseHeight / ratio + 36;
     } else {
       baseWidth = MediaQuery.of(context).size.width;
-      baseHeight = baseWidth * ratio;
+      baseHeight = baseWidth * ratio + 36;
     }
 
     // width
@@ -426,16 +426,30 @@ class _CropEditorState extends State<_CropEditor> {
 
     widget.onStatusChanged?.call(CropStatus.cropping);
 
+    double rectLeft = _rect.left - _imageRect.left;
+    double rectTop = _rect.top - _imageRect.top;
+    double padding = 36;
+
+    double rectLeftPx = rectLeft * screenSizeRatio / _scale;
+    double rectTopPx = rectTop * screenSizeRatio / _scale;
+    double paddingPx = padding * screenSizeRatio;
+
     // use compute() not to block UI update
     final cropResult = await compute(
       withCircleShape ? _doCropCircle : _doCrop,
       [
         _targetImage!,
         Rect.fromLTWH(
-          (_rect.left - _imageRect.left) * screenSizeRatio / _scale,
-          (_rect.top - _imageRect.top) * screenSizeRatio / _scale,
-          _rect.width * screenSizeRatio / _scale,
-          _rect.height * screenSizeRatio / _scale,
+          rectLeftPx > paddingPx ? rectLeftPx - paddingPx : rectLeftPx,
+          rectTopPx > paddingPx ? rectTopPx - paddingPx : rectTopPx - paddingPx,
+          (rectLeftPx > paddingPx ? _rect.width : _rect.width - padding) *
+              screenSizeRatio /
+              _scale,
+          (rectTopPx > paddingPx
+                  ? _rect.height
+                  : _rect.height - padding + rectTop) *
+              screenSizeRatio /
+              _scale,
         ),
       ],
     );
@@ -465,17 +479,24 @@ class _CropEditorState extends State<_CropEditor> {
                         Positioned(
                           left: _imageRect.left,
                           top: _imageRect.top,
-                          child: Image.memory(
-                            widget.image,
-                            width: _isFitVertically
-                                ? null
-                                : MediaQuery.of(context).size.width * _scale,
-                            height: _isFitVertically
-                                ? MediaQuery.of(context).size.height * _scale
-                                : null,
-                            fit: BoxFit.contain,
+                          child: Container(
+                            color: Colors.black,
+                            padding: EdgeInsets.all(36),
+                            child: Image.memory(
+                              widget.image,
+                              width: _isFitVertically
+                                  ? null
+                                  : MediaQuery.of(context).size.width * _scale -
+                                      72,
+                              height: _isFitVertically
+                                  ? MediaQuery.of(context).size.height *
+                                          _scale -
+                                      72
+                                  : null,
+                              fit: BoxFit.contain,
+                            ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
