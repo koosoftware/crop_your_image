@@ -143,6 +143,8 @@ class Crop extends StatelessWidget {
             fixArea: fixArea,
             progressIndicator: progressIndicator,
             interactive: interactive,
+            padding: padding,
+            paddingColor: paddingColor,
           ),
         );
       },
