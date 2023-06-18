@@ -275,8 +275,7 @@ class _HorizontalCalculator extends _Calculator {
   @override
   double screenSizeRatio(
       image.Image targetImage, Size screenSize, double padding) {
-    return (targetImage.width + (padding * 2)) /
-        (screenSize.width + (padding * 2));
+    return (targetImage.width + (padding * 2)) / screenSize.width;
   }
 }
 
@@ -319,7 +318,6 @@ class _VerticalCalculator extends _Calculator {
   @override
   double screenSizeRatio(
       image.Image targetImage, Size screenSize, double padding) {
-    return (targetImage.height + (padding * 2)) /
-        (screenSize.height + (padding * 2));
+    return (targetImage.height + (padding * 2)) / screenSize.height;
   }
 }
