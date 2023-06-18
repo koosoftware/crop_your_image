@@ -272,10 +272,10 @@ class _CropEditorState extends State<_CropEditor> {
 
     if (_isFitVertically) {
       baseHeight = MediaQuery.of(context).size.height;
-      baseWidth = baseHeight / ratio + widget.padding;
+      baseWidth = baseHeight / ratio + 0;
     } else {
       baseWidth = MediaQuery.of(context).size.width;
-      baseHeight = baseWidth * ratio + widget.padding;
+      baseHeight = baseWidth * ratio + 0;
     }
 
     // width
@@ -381,7 +381,7 @@ class _CropEditorState extends State<_CropEditor> {
     final imageRatio = _targetImage!.width / _targetImage!.height;
     _isFitVertically = imageRatio < screenSize.aspectRatio;
 
-    _imageRect = calculator.imageRect(screenSize, imageRatio, widget.padding);
+    _imageRect = calculator.imageRect(screenSize, imageRatio, 0);
 
     if (widget.initialAreaBuilder != null) {
       rect = widget.initialAreaBuilder!(Rect.fromLTWH(
@@ -413,7 +413,7 @@ class _CropEditorState extends State<_CropEditor> {
       );
     } else {
       final screenSizeRatio = calculator.screenSizeRatio(
-          _targetImage!, MediaQuery.of(context).size, widget.padding);
+          _targetImage!, MediaQuery.of(context).size, 0);
       rect = Rect.fromLTWH(
         _imageRect.left + initialArea.left / screenSizeRatio,
         _imageRect.top + initialArea.top / screenSizeRatio,
@@ -430,14 +430,14 @@ class _CropEditorState extends State<_CropEditor> {
     final screenSizeRatio = calculator.screenSizeRatio(
       _targetImage!,
       MediaQuery.of(context).size,
-      widget.padding,
+      0,
     );
 
     widget.onStatusChanged?.call(CropStatus.cropping);
 
     double rectLeft = _rect.left - _imageRect.left;
     double rectTop = _rect.top - _imageRect.top;
-    double padding = widget.padding;
+    double padding = 0;
 
     double rectLeftPx = rectLeft * screenSizeRatio / _scale;
     double rectTopPx = rectTop * screenSizeRatio / _scale;
@@ -490,17 +490,17 @@ class _CropEditorState extends State<_CropEditor> {
                           top: _imageRect.top,
                           child: Container(
                             color: widget.paddingColor,
-                            padding: EdgeInsets.all(widget.padding),
+                            padding: EdgeInsets.all(0),
                             child: Image.memory(
                               widget.image,
                               width: _isFitVertically
                                   ? null
                                   : MediaQuery.of(context).size.width * _scale -
-                                      (widget.padding * 2),
+                                      (0 * 2),
                               height: _isFitVertically
                                   ? MediaQuery.of(context).size.height *
                                           _scale -
-                                      (widget.padding * 2)
+                                      (0 * 2)
                                   : null,
                               fit: BoxFit.contain,
                             ),
