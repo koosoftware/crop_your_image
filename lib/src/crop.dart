@@ -268,14 +268,14 @@ class _CropEditorState extends State<_CropEditor> {
   }) {
     late double baseHeight;
     late double baseWidth;
-    final ratio = (_targetImage!.height) / (_targetImage!.width);
+    final ratio = _targetImage!.height / _targetImage!.width;
 
     if (_isFitVertically) {
-      baseHeight = MediaQuery.of(context).size.height - 200;
-      baseWidth = baseHeight / ratio + 0;
+      baseHeight = MediaQuery.of(context).size.height;
+      baseWidth = baseHeight / ratio;
     } else {
-      baseWidth = MediaQuery.of(context).size.width - 200;
-      baseHeight = baseWidth * ratio + 0;
+      baseWidth = MediaQuery.of(context).size.width;
+      baseHeight = baseWidth * ratio;
     }
 
     // width
@@ -381,7 +381,7 @@ class _CropEditorState extends State<_CropEditor> {
     final imageRatio = _targetImage!.width / _targetImage!.height;
     _isFitVertically = imageRatio < screenSize.aspectRatio;
 
-    _imageRect = calculator.imageRect(screenSize, imageRatio, 100);
+    _imageRect = calculator.imageRect(screenSize, imageRatio, widget.padding);
 
     if (widget.initialAreaBuilder != null) {
       rect = widget.initialAreaBuilder!(Rect.fromLTWH(
@@ -413,7 +413,7 @@ class _CropEditorState extends State<_CropEditor> {
       );
     } else {
       final screenSizeRatio = calculator.screenSizeRatio(
-          _targetImage!, MediaQuery.of(context).size, 100);
+          _targetImage!, MediaQuery.of(context).size, widget.padding);
       rect = Rect.fromLTWH(
         _imageRect.left + initialArea.left / screenSizeRatio,
         _imageRect.top + initialArea.top / screenSizeRatio,
@@ -430,18 +430,19 @@ class _CropEditorState extends State<_CropEditor> {
     final screenSizeRatio = calculator.screenSizeRatio(
       _targetImage!,
       MediaQuery.of(context).size,
-      100,
+      widget.padding,
     );
 
     widget.onStatusChanged?.call(CropStatus.cropping);
 
+    double padding = widget.padding;
+    double paddingPx = padding * screenSizeRatio;
+
     double rectLeft = _rect.left - _imageRect.left;
     double rectTop = _rect.top - _imageRect.top;
-    double padding = 100;
 
     double rectLeftPx = rectLeft * screenSizeRatio / _scale;
     double rectTopPx = rectTop * screenSizeRatio / _scale;
-    double paddingPx = padding * screenSizeRatio;
 
     // use compute() not to block UI update
     final cropResult = await compute(
@@ -449,6 +450,12 @@ class _CropEditorState extends State<_CropEditor> {
       [
         _targetImage!,
         Rect.fromLTWH(
+          rectLeftPx - padding,
+          rectTopPx - padding,
+          (_rect.width) * screenSizeRatio / _scale,
+          (_rect.height) * screenSizeRatio / _scale,
+        ),
+        /*Rect.fromLTWH(
           rectLeftPx > paddingPx ? rectLeftPx - paddingPx : rectLeftPx,
           rectTopPx - paddingPx,
           (rectLeftPx > paddingPx ? _rect.width : _rect.width - padding) *
@@ -459,7 +466,7 @@ class _CropEditorState extends State<_CropEditor> {
                   : _rect.height - padding + rectTop) *
               screenSizeRatio /
               _scale,
-        ),
+        ),*/
       ],
     );
     widget.onCropped(cropResult);
@@ -490,17 +497,17 @@ class _CropEditorState extends State<_CropEditor> {
                           top: _imageRect.top,
                           child: Container(
                             color: widget.paddingColor,
-                            padding: EdgeInsets.all(100),
+                            padding: EdgeInsets.all(widget.padding),
                             child: Image.memory(
                               widget.image,
                               width: _isFitVertically
                                   ? null
                                   : MediaQuery.of(context).size.width * _scale -
-                                      (0 * 2),
+                                      (widget.padding * 2),
                               height: _isFitVertically
                                   ? MediaQuery.of(context).size.height *
                                           _scale -
-                                      (0 * 2)
+                                      (widget.padding * 2)
                                   : null,
                               fit: BoxFit.contain,
                             ),
