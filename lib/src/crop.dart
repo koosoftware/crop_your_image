@@ -428,7 +428,10 @@ class _CropEditorState extends State<_CropEditor> {
     assert(_targetImage != null);
 
     final screenSizeRatio = calculator.screenSizeRatio(
-        _targetImage!, MediaQuery.of(context).size, widget.padding);
+      _targetImage!,
+      MediaQuery.of(context).size,
+      0,
+    );
 
     widget.onStatusChanged?.call(CropStatus.cropping);
 
@@ -438,7 +441,7 @@ class _CropEditorState extends State<_CropEditor> {
 
     double rectLeftPx = rectLeft * screenSizeRatio / _scale;
     double rectTopPx = rectTop * screenSizeRatio / _scale;
-    double paddingPx = padding * screenSizeRatio / _scale;
+    double paddingPx = padding * screenSizeRatio;
 
     // use compute() not to block UI update
     final cropResult = await compute(
