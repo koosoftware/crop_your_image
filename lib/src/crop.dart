@@ -378,8 +378,7 @@ class _CropEditorState extends State<_CropEditor> {
   void _resetCroppingArea() {
     final screenSize = MediaQuery.of(context).size;
 
-    final imageRatio = (_targetImage!.width + (widget.padding * 2)) /
-        (_targetImage!.height + (widget.padding * 2));
+    final imageRatio = _targetImage!.width / _targetImage!.height;
     _isFitVertically = imageRatio < screenSize.aspectRatio;
 
     _imageRect = calculator.imageRect(screenSize, imageRatio, widget.padding);
@@ -442,7 +441,7 @@ class _CropEditorState extends State<_CropEditor> {
     double rectLeft = _rect.left - _imageRect.left;
     double rectTop = _rect.top - _imageRect.top;
 
-    double rectLeftPx = rectLeft * screenSizeRatio / _scale;
+    double rectLeftPx = rectLeft * screenSizeRatio / _scale * 0.9;
     double rectTopPx = rectTop * screenSizeRatio / _scale;
 
     // use compute() not to block UI update
