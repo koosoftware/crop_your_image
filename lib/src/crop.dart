@@ -436,10 +436,8 @@ class _CropEditorState extends State<_CropEditor> {
     double rectTop = _rect.top - _imageRect.top;
     double padding = widget.padding;
 
-    double newScale = _scale * 0.9;
-
-    double rectLeftPx = rectLeft * screenSizeRatio / newScale;
-    double rectTopPx = rectTop * screenSizeRatio / newScale;
+    double rectLeftPx = rectLeft * screenSizeRatio / _scale;
+    double rectTopPx = rectTop * screenSizeRatio / _scale;
     double paddingPx = padding * screenSizeRatio;
 
     // use compute() not to block UI update
@@ -449,15 +447,15 @@ class _CropEditorState extends State<_CropEditor> {
         _targetImage!,
         Rect.fromLTWH(
           rectLeftPx > paddingPx ? rectLeftPx - paddingPx : rectLeftPx,
-          rectTopPx > paddingPx ? rectTopPx - paddingPx : rectTopPx - paddingPx,
+          rectTopPx - padding,
           (rectLeftPx > paddingPx ? _rect.width : _rect.width - padding) *
               screenSizeRatio /
-              newScale,
+              _scale,
           (rectTopPx > paddingPx
                   ? _rect.height
                   : _rect.height - padding + rectTop) *
               screenSizeRatio /
-              newScale,
+              _scale,
         ),
       ],
     );
