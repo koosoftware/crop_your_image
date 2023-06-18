@@ -268,16 +268,14 @@ class _CropEditorState extends State<_CropEditor> {
   }) {
     late double baseHeight;
     late double baseWidth;
-    final ratio = _targetImage!.height +
-        (widget.padding * 2) / _targetImage!.width +
-        (widget.padding * 2);
+    final ratio = _targetImage!.height / _targetImage!.width;
 
     if (_isFitVertically) {
-      baseHeight = MediaQuery.of(context).size.height;
-      baseWidth = baseHeight / ratio;
+      baseHeight = MediaQuery.of(context).size.height + (widget.padding * 2);
+      baseWidth = baseHeight / ratio + (widget.padding * 2);
     } else {
-      baseWidth = MediaQuery.of(context).size.width;
-      baseHeight = baseWidth * ratio;
+      baseWidth = MediaQuery.of(context).size.width + (widget.padding * 2);
+      baseHeight = baseWidth * ratio + (widget.padding * 2);
     }
 
     // width
