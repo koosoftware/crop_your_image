@@ -444,16 +444,14 @@ class _CropEditorState extends State<_CropEditor> {
     double rectLeftPx = rectLeft * screenSizeRatio / _scale;
     double rectTopPx = rectTop * screenSizeRatio / _scale;
 
-    double newScale = 1.08;
-
     // use compute() not to block UI update
     final cropResult = await compute(
       withCircleShape ? _doCropCircle : _doCrop,
       [
         _targetImage!,
         Rect.fromLTWH(
-          (rectLeftPx - padding) * newScale,
-          (rectTopPx - padding) * newScale,
+          rectLeftPx - padding,
+          rectTopPx - padding,
           (_rect.width) * screenSizeRatio / _scale,
           (_rect.height) * screenSizeRatio / _scale,
         ),
