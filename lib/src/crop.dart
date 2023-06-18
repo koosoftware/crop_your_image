@@ -436,7 +436,7 @@ class _CropEditorState extends State<_CropEditor> {
     double rectTop = _rect.top - _imageRect.top;
     double padding = widget.padding;
 
-    double newScale = _scale * 1.1;
+    double newScale = _scale * 0.9;
 
     double rectLeftPx = rectLeft * screenSizeRatio / newScale;
     double rectTopPx = rectTop * screenSizeRatio / newScale;
