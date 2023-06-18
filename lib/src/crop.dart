@@ -428,7 +428,10 @@ class _CropEditorState extends State<_CropEditor> {
     assert(_targetImage != null);
 
     final screenSizeRatio = calculator.screenSizeRatio(
-        _targetImage!, MediaQuery.of(context).size, widget.padding);
+      _targetImage!,
+      MediaQuery.of(context).size,
+      widget.padding,
+    );
 
     widget.onStatusChanged?.call(CropStatus.cropping);
 
@@ -447,7 +450,7 @@ class _CropEditorState extends State<_CropEditor> {
         _targetImage!,
         Rect.fromLTWH(
           rectLeftPx > paddingPx ? rectLeftPx - paddingPx : rectLeftPx,
-          rectTopPx > paddingPx ? rectTopPx - paddingPx : rectTopPx - paddingPx,
+          rectTopPx - padding,
           (rectLeftPx > paddingPx ? _rect.width : _rect.width - padding) *
               screenSizeRatio /
               _scale,
