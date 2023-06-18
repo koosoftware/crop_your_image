@@ -441,7 +441,7 @@ class _CropEditorState extends State<_CropEditor> {
     double rectLeft = _rect.left - _imageRect.left;
     double rectTop = _rect.top - _imageRect.top;
 
-    double rectLeftPx = rectLeft * screenSizeRatio / _scale * 1.1;
+    double rectLeftPx = rectLeft * screenSizeRatio / _scale * 1.08;
     double rectTopPx = rectTop * screenSizeRatio / _scale;
 
     // use compute() not to block UI update
