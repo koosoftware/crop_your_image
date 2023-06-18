@@ -436,8 +436,10 @@ class _CropEditorState extends State<_CropEditor> {
     double rectTop = _rect.top - _imageRect.top;
     double padding = widget.padding;
 
-    double rectLeftPx = rectLeft * screenSizeRatio / _scale;
-    double rectTopPx = rectTop * screenSizeRatio / _scale;
+    double newScale = _scale * 1.1;
+
+    double rectLeftPx = rectLeft * screenSizeRatio / newScale;
+    double rectTopPx = rectTop * screenSizeRatio / newScale;
     double paddingPx = padding * screenSizeRatio;
 
     // use compute() not to block UI update
@@ -450,12 +452,12 @@ class _CropEditorState extends State<_CropEditor> {
           rectTopPx > paddingPx ? rectTopPx - paddingPx : rectTopPx - paddingPx,
           (rectLeftPx > paddingPx ? _rect.width : _rect.width - padding) *
               screenSizeRatio /
-              _scale,
+              newScale,
           (rectTopPx > paddingPx
                   ? _rect.height
                   : _rect.height - padding + rectTop) *
               screenSizeRatio /
-              _scale,
+              newScale,
         ),
       ],
     );
