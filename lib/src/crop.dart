@@ -272,10 +272,10 @@ class _CropEditorState extends State<_CropEditor> {
 
     if (_isFitVertically) {
       baseHeight = MediaQuery.of(context).size.height;
-      baseWidth = baseHeight / ratio;
+      baseWidth = baseHeight / ratio + widget.padding;
     } else {
       baseWidth = MediaQuery.of(context).size.width;
-      baseHeight = baseWidth * ratio;
+      baseHeight = baseWidth * ratio + widget.padding;
     }
 
     // width
@@ -428,21 +428,17 @@ class _CropEditorState extends State<_CropEditor> {
     assert(_targetImage != null);
 
     final screenSizeRatio = calculator.screenSizeRatio(
-      _targetImage!,
-      MediaQuery.of(context).size,
-      widget.padding,
-    );
+        _targetImage!, MediaQuery.of(context).size, widget.padding);
 
     widget.onStatusChanged?.call(CropStatus.cropping);
 
-    double padding = widget.padding;
-    double paddingPx = padding * screenSizeRatio;
-
     double rectLeft = _rect.left - _imageRect.left;
     double rectTop = _rect.top - _imageRect.top;
+    double padding = widget.padding;
 
     double rectLeftPx = rectLeft * screenSizeRatio / _scale;
     double rectTopPx = rectTop * screenSizeRatio / _scale;
+    double paddingPx = padding * screenSizeRatio;
 
     // use compute() not to block UI update
     final cropResult = await compute(
@@ -450,14 +446,8 @@ class _CropEditorState extends State<_CropEditor> {
       [
         _targetImage!,
         Rect.fromLTWH(
-          rectLeftPx - padding,
-          rectTopPx - padding,
-          (_rect.width) * screenSizeRatio / _scale,
-          (_rect.height) * screenSizeRatio / _scale,
-        ),
-        /*Rect.fromLTWH(
           rectLeftPx > paddingPx ? rectLeftPx - paddingPx : rectLeftPx,
-          rectTopPx - paddingPx,
+          rectTopPx > paddingPx ? rectTopPx - paddingPx : rectTopPx - paddingPx,
           (rectLeftPx > paddingPx ? _rect.width : _rect.width - padding) *
               screenSizeRatio /
               _scale,
@@ -466,7 +456,7 @@ class _CropEditorState extends State<_CropEditor> {
                   : _rect.height - padding + rectTop) *
               screenSizeRatio /
               _scale,
-        ),*/
+        ),
       ],
     );
     widget.onCropped(cropResult);
