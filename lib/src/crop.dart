@@ -271,11 +271,11 @@ class _CropEditorState extends State<_CropEditor> {
     final ratio = _targetImage!.height / _targetImage!.width;
 
     if (_isFitVertically) {
-      baseHeight = MediaQuery.of(context).size.height + (widget.padding * 2);
-      baseWidth = baseHeight / ratio + (widget.padding * 2);
+      baseHeight = MediaQuery.of(context).size.height;
+      baseWidth = baseHeight / ratio;
     } else {
-      baseWidth = MediaQuery.of(context).size.width + (widget.padding * 2);
-      baseHeight = baseWidth * ratio + (widget.padding * 2);
+      baseWidth = MediaQuery.of(context).size.width;
+      baseHeight = baseWidth * ratio;
     }
 
     // width
@@ -306,8 +306,8 @@ class _CropEditorState extends State<_CropEditor> {
     // apply
     setState(() {
       _imageRect = Rect.fromLTRB(
-        newLeft,
-        newTop,
+        newLeft - widget.padding,
+        newTop - widget.padding,
         newLeft + newWidth,
         newTop + newHeight,
       );
