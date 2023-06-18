@@ -502,9 +502,12 @@ class _CropEditorState extends State<_CropEditor> {
                               widget.image,
                               width: _isFitVertically
                                   ? null
-                                  : MediaQuery.of(context).size.width * _scale,
+                                  : MediaQuery.of(context).size.width * _scale +
+                                      (widget.padding * 2),
                               height: _isFitVertically
-                                  ? MediaQuery.of(context).size.height * _scale
+                                  ? MediaQuery.of(context).size.height *
+                                          _scale +
+                                      (widget.padding * 2)
                                   : null,
                               fit: BoxFit.contain,
                             ),
