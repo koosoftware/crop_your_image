@@ -496,11 +496,11 @@ class _CropEditorState extends State<_CropEditor> {
                               width: _isFitVertically
                                   ? null
                                   : MediaQuery.of(context).size.width * _scale -
-                                      (0 * 2),
+                                      (100 * 2),
                               height: _isFitVertically
                                   ? MediaQuery.of(context).size.height *
                                           _scale -
-                                      (0 * 2)
+                                      (100 * 2)
                                   : null,
                               fit: BoxFit.contain,
                             ),
