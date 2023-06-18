@@ -306,8 +306,8 @@ class _CropEditorState extends State<_CropEditor> {
     // apply
     setState(() {
       _imageRect = Rect.fromLTRB(
-        newLeft,
-        newTop,
+        newLeft - 100,
+        newTop - 100,
         newLeft + newWidth,
         newTop + newHeight,
       );
