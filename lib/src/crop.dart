@@ -481,7 +481,7 @@ class _CropEditorState extends State<_CropEditor> {
                           top: _imageRect.top,
                           child: Container(
                             color: widget.paddingColor,
-                            padding: EdgeInsets.all(0),
+                            padding: EdgeInsets.all(widget.padding),
                             child: Image.memory(
                               widget.image,
                               width: _isFitVertically
