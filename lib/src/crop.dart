@@ -438,7 +438,7 @@ class _CropEditorState extends State<_CropEditor> {
 
     double rectLeftPx = rectLeft * screenSizeRatio / _scale;
     double rectTopPx = rectTop * screenSizeRatio / _scale;
-    double paddingPx = padding * screenSizeRatio;
+    double paddingPx = padding * screenSizeRatio / _scale;
 
     // use compute() not to block UI update
     final cropResult = await compute(
@@ -447,7 +447,7 @@ class _CropEditorState extends State<_CropEditor> {
         _targetImage!,
         Rect.fromLTWH(
           rectLeftPx,
-          rectTopPx > padding ? rectTopPx - padding : rectTopPx,
+          rectTopPx > paddingPx ? rectTopPx - paddingPx : rectTopPx,
           (_rect.width) * screenSizeRatio / _scale,
           (_rect.height) * screenSizeRatio / _scale,
         ),
