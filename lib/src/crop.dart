@@ -272,10 +272,10 @@ class _CropEditorState extends State<_CropEditor> {
 
     if (_isFitVertically) {
       baseHeight = MediaQuery.of(context).size.height;
-      baseWidth = baseHeight / ratio + widget.padding;
+      baseWidth = baseHeight / ratio;
     } else {
       baseWidth = MediaQuery.of(context).size.width;
-      baseHeight = baseWidth * ratio + widget.padding;
+      baseHeight = baseWidth * ratio;
     }
 
     // width
@@ -446,16 +446,10 @@ class _CropEditorState extends State<_CropEditor> {
       [
         _targetImage!,
         Rect.fromLTWH(
-          rectLeftPx > paddingPx ? rectLeftPx - paddingPx : rectLeftPx,
-          rectTopPx > paddingPx ? rectTopPx : rectTopPx - paddingPx,
-          (rectLeftPx > paddingPx ? _rect.width : _rect.width - padding) *
-              screenSizeRatio /
-              _scale,
-          (rectTopPx > paddingPx
-                  ? _rect.height
-                  : _rect.height - padding + rectTop) *
-              screenSizeRatio /
-              _scale,
+          rectLeftPx,
+          rectTopPx,
+          (_rect.width) * screenSizeRatio / _scale,
+          (_rect.height) * screenSizeRatio / _scale,
         ),
       ],
     );
@@ -492,12 +486,9 @@ class _CropEditorState extends State<_CropEditor> {
                               widget.image,
                               width: _isFitVertically
                                   ? null
-                                  : MediaQuery.of(context).size.width * _scale -
-                                      (widget.padding * 2),
+                                  : MediaQuery.of(context).size.width * _scale,
                               height: _isFitVertically
-                                  ? MediaQuery.of(context).size.height *
-                                          _scale -
-                                      (widget.padding * 2)
+                                  ? MediaQuery.of(context).size.height * _scale
                                   : null,
                               fit: BoxFit.contain,
                             ),
