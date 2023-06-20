@@ -234,14 +234,27 @@ class _CropEditorState extends State<_CropEditor> {
   }
 
   void _updateScale(ScaleUpdateDetails detail) {
-    // move
+    late double baseHeight;
+    late double baseWidth;
+    final ratio = _targetImage!.height / _targetImage!.width;
 
-    double oriImageRectWidth = _targetImage!.width + 0;
-    double newImageRectWidth = _imageRect.width / detail.scale;
+    if (_isFitVertically) {
+      baseHeight = MediaQuery.of(context).size.height;
+      baseWidth = baseHeight / ratio;
+    } else {
+      baseWidth = MediaQuery.of(context).size.width;
+      baseHeight = baseWidth * ratio;
+    }
+
+    // width
+    final newWidth = baseWidth * (_baseScale * detail.scale);
+
+    // move
+    //double newImageRectWidth = _imageRect.width / detail.scale;
 
     var movedLeft = _imageRect.left + detail.focalPointDelta.dx;
-    if (movedLeft + newImageRectWidth < _rect.right) {
-      movedLeft = _rect.right - newImageRectWidth;
+    if (movedLeft + newWidth < _rect.right) {
+      movedLeft = _rect.right - newWidth;
     }
 
     var movedTop = _imageRect.top + detail.focalPointDelta.dy;
