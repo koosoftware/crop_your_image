@@ -235,7 +235,11 @@ class _CropEditorState extends State<_CropEditor> {
 
   void _updateScale(ScaleUpdateDetails detail) {
     // move
-    double newImageRectWidth = _imageRect.width * _baseScale * detail.scale;
+    final screenSizeRatio = calculator.screenSizeRatio(
+        _targetImage!, MediaQuery.of(context).size, widget.padding);
+
+    double newImageRectWidth =
+        _imageRect.width * screenSizeRatio / (_baseScale * detail.scale);
 
     var movedLeft = _imageRect.left + detail.focalPointDelta.dx;
     if (movedLeft + newImageRectWidth < _rect.right) {
