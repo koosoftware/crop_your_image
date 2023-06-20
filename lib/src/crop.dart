@@ -245,12 +245,12 @@ class _CropEditorState extends State<_CropEditor> {
       movedTop = _rect.bottom - _imageRect.height;
     }
     setState(() {
-      _imageRect = Rect.fromLTWH(
+      /*_imageRect = Rect.fromLTWH(
         min(_rect.left, movedLeft),
         min(_rect.top, movedTop),
-        _imageRect.width - 2,
-        _imageRect.height - 2,
-      );
+        _imageRect.width,
+        _imageRect.height,
+      );*/
     });
 
     // scale
