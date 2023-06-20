@@ -247,14 +247,14 @@ class _CropEditorState extends State<_CropEditor> {
     }
 
     // width
-    final newWidth = baseWidth * (_baseScale * detail.scale);
+    //final newWidth = baseWidth * (_baseScale * detail.scale);
 
     // move
-    //double newImageRectWidth = _imageRect.width / detail.scale;
+    double newImageRectWidth = _imageRect.width * (_baseScale * detail.scale);
 
     var movedLeft = _imageRect.left + detail.focalPointDelta.dx;
-    if (movedLeft + newWidth < _rect.right) {
-      movedLeft = _rect.right - newWidth;
+    if (movedLeft + newImageRectWidth < _rect.right) {
+      movedLeft = _rect.right - newImageRectWidth;
     }
 
     var movedTop = _imageRect.top + detail.focalPointDelta.dy;
