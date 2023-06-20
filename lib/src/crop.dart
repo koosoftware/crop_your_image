@@ -236,8 +236,9 @@ class _CropEditorState extends State<_CropEditor> {
   void _updateScale(ScaleUpdateDetails detail) {
     // move
     double newImageRectWidth = _imageRect.width / _scale;
+    double newImageRectLeft = _imageRect.left / scale;
 
-    var movedLeft = _imageRect.left + detail.focalPointDelta.dx;
+    var movedLeft = newImageRectLeft + detail.focalPointDelta.dx;
     if (movedLeft + newImageRectWidth < _rect.right) {
       movedLeft = _rect.right - newImageRectWidth;
     }
@@ -250,7 +251,7 @@ class _CropEditorState extends State<_CropEditor> {
       _imageRect = Rect.fromLTWH(
         min(_rect.left, movedLeft),
         min(_rect.top, movedTop),
-        newImageRectWidth,
+        _imageRect.width,
         _imageRect.height,
       );
     });
