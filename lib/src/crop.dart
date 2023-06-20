@@ -271,10 +271,10 @@ class _CropEditorState extends State<_CropEditor> {
     final ratio = _targetImage!.height / _targetImage!.width;
 
     if (_isFitVertically) {
-      baseHeight = MediaQuery.of(context).size.height;
+      baseHeight = MediaQuery.of(context).size.height + 200;
       baseWidth = baseHeight / ratio;
     } else {
-      baseWidth = MediaQuery.of(context).size.width;
+      baseWidth = MediaQuery.of(context).size.width + 200;
       baseHeight = baseWidth * ratio;
     }
 
@@ -492,10 +492,12 @@ class _CropEditorState extends State<_CropEditor> {
                               widget.image,
                               width: _isFitVertically
                                   ? null
-                                  : (MediaQuery.of(context).size.width - 0) *
+                                  : (MediaQuery.of(context).size.width -
+                                          widget.padding * 2) *
                                       _scale,
                               height: _isFitVertically
-                                  ? (MediaQuery.of(context).size.height - 0) *
+                                  ? (MediaQuery.of(context).size.height -
+                                          widget.padding * 2) *
                                       _scale
                                   : null,
                               fit: BoxFit.contain,
