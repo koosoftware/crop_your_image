@@ -230,8 +230,8 @@ abstract class _Calculator {
     return Rect.fromLTRB(
       max(rect.left, imageRect.left),
       max(rect.top, imageRect.top),
-      min(rect.right, imageRect.right),
-      min(rect.bottom, imageRect.bottom),
+      min(rect.right, imageRect.right - 200),
+      min(rect.bottom, imageRect.bottom - 200),
     );
   }
 }
