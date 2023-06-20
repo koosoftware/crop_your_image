@@ -248,7 +248,7 @@ class _CropEditorState extends State<_CropEditor> {
       _imageRect = Rect.fromLTWH(
         min(_rect.left, movedLeft),
         min(_rect.top, movedTop),
-        _imageRect.width,
+        _imageRect.width - 200,
         _imageRect.height,
       );
     });
@@ -474,8 +474,8 @@ class _CropEditorState extends State<_CropEditor> {
                 onPointerDown: (_) => _pointerNum++,
                 onPointerUp: (_) => _pointerNum--,
                 child: GestureDetector(
-                  //onScaleStart: widget.interactive ? _startScale : null,
-                  //onScaleUpdate: widget.interactive ? _updateScale : null,
+                  onScaleStart: widget.interactive ? _startScale : null,
+                  onScaleUpdate: widget.interactive ? _updateScale : null,
                   child: Container(
                     color: widget.baseColor,
                     width: MediaQuery.of(context).size.width,
