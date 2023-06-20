@@ -237,7 +237,7 @@ class _CropEditorState extends State<_CropEditor> {
     // move
 
     double oriImageRectWidth = _targetImage!.width + 0;
-    double newImageRectWidth = oriImageRectWidth / _scale;
+    double newImageRectWidth = oriImageRectWidth;
 
     var movedLeft = _imageRect.left + detail.focalPointDelta.dx;
     if (movedLeft + _imageRect.width < _rect.right) {
