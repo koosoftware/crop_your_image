@@ -248,7 +248,7 @@ class _CropEditorState extends State<_CropEditor> {
       _imageRect = Rect.fromLTWH(
         min(_rect.left, movedLeft),
         min(_rect.top, movedTop),
-        _imageRect.width + 20,
+        _imageRect.width,
         _imageRect.height,
       );
     });
