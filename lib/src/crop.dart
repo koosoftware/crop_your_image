@@ -247,11 +247,10 @@ class _CropEditorState extends State<_CropEditor> {
     }
 
     // width
-    //final newWidth = baseWidth * (_baseScale * detail.scale);
+    final newWidth = baseWidth * (_baseScale * detail.scale);
 
     // move
-    double newImageRectWidth =
-        (_targetImage!.width + 200) / (_baseScale * detail.scale);
+    double newImageRectWidth = (newWidth) / (_baseScale * detail.scale);
     double widthDiff = (newImageRectWidth - _imageRect.width).abs() / 2;
     double finalNewImageRectWidth = newImageRectWidth + widthDiff;
 
