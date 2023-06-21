@@ -327,8 +327,8 @@ class _CropEditorState extends State<_CropEditor> {
       _imageRect = Rect.fromLTRB(
         newLeft,
         newTop,
-        newLeft + newWidth + widget.padding * 2 * nextScale,
-        newTop + newHeight + widget.padding * 2 * nextScale,
+        newLeft + newWidth,
+        newTop + newHeight,
       );
       _scale = nextScale;
     });
@@ -522,7 +522,7 @@ class _CropEditorState extends State<_CropEditor> {
                                           widget.padding * 2 * _scale) *
                                       _scale
                                   : null,
-                              fit: BoxFit.contain,
+                              fit: BoxFit.none,
                             ),
                           ),
                         )
