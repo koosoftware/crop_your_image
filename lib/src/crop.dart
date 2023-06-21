@@ -239,7 +239,7 @@ class _CropEditorState extends State<_CropEditor> {
 
     double oriImageWidthPx = _targetImage!.width + 0;
     double oriImageWidth = oriImageWidthPx / screenSizeRatio * _scale;
-    print("oriImageWidth: " + oriImageWidthPx.toString());
+    print("oriImageWidth: " + oriImageWidth.toString());
 
     // move
     double newImageRectWidth = _imageRect.width / _scale;
