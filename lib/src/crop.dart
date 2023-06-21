@@ -522,7 +522,7 @@ class _CropEditorState extends State<_CropEditor> {
                                           widget.padding * 2 * _scale) *
                                       _scale
                                   : null,
-                              fit: BoxFit.none,
+                              fit: BoxFit.fill,
                             ),
                           ),
                         )
