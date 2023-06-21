@@ -238,23 +238,23 @@ class _CropEditorState extends State<_CropEditor> {
         _targetImage!, MediaQuery.of(context).size, widget.padding, _scale);
 
     // calculate width offset
-    double targetImageWidth = _targetImage!.width / screenSizeRatio * _scale;
+    /*double targetImageWidth = _targetImage!.width / screenSizeRatio * _scale;
     double targetImageWidthWithPadding =
         targetImageWidth + (widget.padding * 2 * _scale);
     double newImageRectWidth = _imageRect.width;
     double widthDiff = newImageRectWidth - targetImageWidthWithPadding;
-    double finalNewImageRectWidth = newImageRectWidth - widthDiff;
+    double finalNewImageRectWidth = newImageRectWidth - widthDiff;*/
 
     // calculate height offset
-    double targetImageHeight = _targetImage!.height / screenSizeRatio * _scale;
+    /*double targetImageHeight = _targetImage!.height / screenSizeRatio * _scale;
     double targetImageHeightWithPadding =
         targetImageHeight + (widget.padding * 2 * _scale);
     double newImageRectHeight = _imageRect.height;
     double heightDiff = newImageRectHeight - targetImageHeightWithPadding;
-    double finalNewImageRectHeight = newImageRectHeight - heightDiff;
+    double finalNewImageRectHeight = newImageRectHeight - heightDiff;*/
 
     // move
-    var movedLeft = _imageRect.left + detail.focalPointDelta.dx;
+    /*var movedLeft = _imageRect.left + detail.focalPointDelta.dx;
     if (movedLeft + finalNewImageRectWidth < _rect.right) {
       movedLeft = _rect.right - finalNewImageRectWidth;
     }
@@ -262,7 +262,17 @@ class _CropEditorState extends State<_CropEditor> {
     var movedTop = _imageRect.top + detail.focalPointDelta.dy;
     if (movedTop + finalNewImageRectHeight < _rect.bottom) {
       movedTop = _rect.bottom - finalNewImageRectHeight;
+    }*/
+    var movedLeft = _imageRect.left + detail.focalPointDelta.dx;
+    if (movedLeft + _imageRect.width < _rect.right) {
+      movedLeft = _rect.right - _imageRect.width;
     }
+
+    var movedTop = _imageRect.top + detail.focalPointDelta.dy;
+    if (movedTop + _imageRect.height < _rect.bottom) {
+      movedTop = _rect.bottom - _imageRect.height;
+    }
+
     setState(() {
       _imageRect = Rect.fromLTWH(
         min(_rect.left, movedLeft),
