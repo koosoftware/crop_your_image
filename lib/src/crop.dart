@@ -235,12 +235,12 @@ class _CropEditorState extends State<_CropEditor> {
 
   void _updateScale(ScaleUpdateDetails detail) {
     final screenSizeRatio = calculator.screenSizeRatio(
-        _targetImage!, MediaQuery.of(context).size, widget.padding);
+        _targetImage!, MediaQuery.of(context).size, widget.padding, _scale);
 
     // calculate width offset
     double targetImageWidth = _targetImage!.width / screenSizeRatio * _scale;
     double targetImageWidthWithPadding =
-        targetImageWidth + (widget.padding * 2);
+        targetImageWidth + (widget.padding * 2 * _scale);
     double newImageRectWidth = _imageRect.width;
     double widthDiff = newImageRectWidth - targetImageWidthWithPadding;
     double finalNewImageRectWidth = newImageRectWidth - widthDiff;
@@ -248,7 +248,7 @@ class _CropEditorState extends State<_CropEditor> {
     // calculate height offset
     double targetImageHeight = _targetImage!.height / screenSizeRatio * _scale;
     double targetImageHeightWithPadding =
-        targetImageHeight + (widget.padding * 2);
+        targetImageHeight + (widget.padding * 2 * _scale);
     double newImageRectHeight = _imageRect.height;
     double heightDiff = newImageRectHeight - targetImageHeightWithPadding;
     double finalNewImageRectHeight = newImageRectHeight - heightDiff;
@@ -400,7 +400,8 @@ class _CropEditorState extends State<_CropEditor> {
     final imageRatio = _targetImage!.width / _targetImage!.height;
     _isFitVertically = imageRatio < screenSize.aspectRatio;
 
-    _imageRect = calculator.imageRect(screenSize, imageRatio, widget.padding);
+    _imageRect =
+        calculator.imageRect(screenSize, imageRatio, widget.padding, _scale);
 
     if (widget.initialAreaBuilder != null) {
       rect = widget.initialAreaBuilder!(Rect.fromLTWH(
@@ -432,7 +433,7 @@ class _CropEditorState extends State<_CropEditor> {
       );
     } else {
       final screenSizeRatio = calculator.screenSizeRatio(
-          _targetImage!, MediaQuery.of(context).size, widget.padding);
+          _targetImage!, MediaQuery.of(context).size, widget.padding, _scale);
       rect = Rect.fromLTWH(
         _imageRect.left + initialArea.left / screenSizeRatio,
         _imageRect.top + initialArea.top / screenSizeRatio,
@@ -447,7 +448,7 @@ class _CropEditorState extends State<_CropEditor> {
     assert(_targetImage != null);
 
     final screenSizeRatio = calculator.screenSizeRatio(
-        _targetImage!, MediaQuery.of(context).size, widget.padding);
+        _targetImage!, MediaQuery.of(context).size, widget.padding, _scale);
 
     widget.onStatusChanged?.call(CropStatus.cropping);
 
@@ -506,17 +507,17 @@ class _CropEditorState extends State<_CropEditor> {
                           top: _imageRect.top,
                           child: Container(
                             color: widget.paddingColor,
-                            padding: EdgeInsets.all(widget.padding),
+                            padding: EdgeInsets.all(widget.padding * _scale),
                             child: Image.memory(
                               widget.image,
                               width: _isFitVertically
                                   ? null
                                   : (MediaQuery.of(context).size.width -
-                                          widget.padding * 2) *
+                                          widget.padding * 2 * _scale) *
                                       _scale,
                               height: _isFitVertically
                                   ? (MediaQuery.of(context).size.height -
-                                          widget.padding * 2) *
+                                          widget.padding * 2 * _scale) *
                                       _scale
                                   : null,
                               fit: BoxFit.contain,
