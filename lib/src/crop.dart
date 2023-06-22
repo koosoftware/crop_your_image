@@ -328,7 +328,7 @@ class _CropEditorState extends State<_CropEditor> {
         newLeft,
         newTop,
         newLeft + newWidth,
-        newTop + newHeight,
+        newTop + newHeight + 36,
       );
       _scale = nextScale;
     });
@@ -416,10 +416,6 @@ class _CropEditorState extends State<_CropEditor> {
 
     if (widget.interactive) {
       final initialScale = calculator.scaleToCover(screenSize, _imageRect);
-
-      double initScale =
-          (screenSize.width + widget.padding * 2) / screenSize.width;
-
       _applyScale(1);
     }
   }
