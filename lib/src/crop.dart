@@ -238,17 +238,17 @@ class _CropEditorState extends State<_CropEditor> {
         _targetImage!, MediaQuery.of(context).size, widget.padding, _scale);
 
     // calculate width offset
-    double targetImageWidth = _targetImage!.width / screenSizeRatio * _scale;
+    double targetImageWidth = _targetImage!.width / screenSizeRatio;
     double targetImageWidthWithPadding =
-        (targetImageWidth + widget.padding * 2) * _scale;
+        targetImageWidth + widget.padding * 2 * _scale;
     double newImageRectWidth = _imageRect.width * _scale;
     double widthDiff = newImageRectWidth - targetImageWidthWithPadding;
     double finalNewImageRectWidth = newImageRectWidth - widthDiff;
 
     // calculate height offset
-    double targetImageHeight = _targetImage!.height / screenSizeRatio * _scale;
+    double targetImageHeight = _targetImage!.height / screenSizeRatio;
     double targetImageHeightWithPadding =
-        (targetImageHeight + widget.padding * 2) * _scale;
+        targetImageHeight + widget.padding * 2 * _scale;
     double newImageRectHeight = _imageRect.height * _scale;
     double heightDiff = newImageRectHeight - targetImageHeightWithPadding;
     double finalNewImageRectHeight = newImageRectHeight - heightDiff;
