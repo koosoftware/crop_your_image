@@ -452,13 +452,14 @@ class _CropEditorState extends State<_CropEditor> {
 
     widget.onStatusChanged?.call(CropStatus.cropping);
 
-    double rectLeft = _rect.left - _imageRect.left;
-    double rectTop = _rect.top - _imageRect.top;
     double padding = widget.padding * _scale;
+    double paddingPx = padding * screenSizeRatio / _scale;
+
+    double rectLeft = _rect.left - _imageRect.left - padding;
+    double rectTop = _rect.top - _imageRect.top - padding;
 
     double rectLeftPx = rectLeft * screenSizeRatio / _scale;
     double rectTopPx = rectTop * screenSizeRatio / _scale;
-    double paddingPx = padding * screenSizeRatio / _scale;
 
     // use compute() not to block UI update
     final cropResult = await compute(
@@ -466,8 +467,8 @@ class _CropEditorState extends State<_CropEditor> {
       [
         _targetImage!,
         Rect.fromLTWH(
-          rectLeftPx - padding,
-          rectTopPx - padding,
+          rectLeftPx,
+          rectTopPx,
           (rectLeftPx > paddingPx
                   ? _rect.width
                   : _rect.width - padding + rectLeft) *
