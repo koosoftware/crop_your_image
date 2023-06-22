@@ -452,7 +452,7 @@ class _CropEditorState extends State<_CropEditor> {
 
     widget.onStatusChanged?.call(CropStatus.cropping);
 
-    double padding = widget.padding;
+    double padding = widget.padding * _scale;
     double paddingPx = padding * screenSizeRatio / _scale;
 
     double rectLeft = _rect.left - _imageRect.left;
@@ -467,8 +467,8 @@ class _CropEditorState extends State<_CropEditor> {
       [
         _targetImage!,
         Rect.fromLTWH(
-          rectLeftPx - paddingPx * _scale,
-          rectTopPx - paddingPx * _scale,
+          rectLeftPx - paddingPx,
+          rectTopPx - paddingPx,
           (rectLeftPx > paddingPx
                   ? _rect.width
                   : _rect.width - padding + rectLeft) *
@@ -515,13 +515,13 @@ class _CropEditorState extends State<_CropEditor> {
                               widget.image,
                               width: _isFitVertically
                                   ? null
-                                  : (MediaQuery.of(context).size.width *
-                                          _scale -
-                                      widget.padding * 2 * _scale),
+                                  : (MediaQuery.of(context).size.width +
+                                          2 * widget.padding) *
+                                      _scale,
                               height: _isFitVertically
-                                  ? (MediaQuery.of(context).size.height *
-                                          _scale -
-                                      widget.padding * 2 * _scale)
+                                  ? (MediaQuery.of(context).size.height +
+                                          2 * widget.padding) *
+                                      _scale
                                   : null,
                               fit: BoxFit.contain,
                             ),
