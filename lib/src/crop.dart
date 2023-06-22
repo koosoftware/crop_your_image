@@ -452,14 +452,13 @@ class _CropEditorState extends State<_CropEditor> {
 
     widget.onStatusChanged?.call(CropStatus.cropping);
 
-    double padding = widget.padding * _scale;
-    double paddingPx = padding * screenSizeRatio / _scale;
-
     double rectLeft = _rect.left - _imageRect.left;
     double rectTop = _rect.top - _imageRect.top;
+    double padding = widget.padding * _scale;
 
-    double rectLeftPx = rectLeft * screenSizeRatio;
-    double rectTopPx = rectTop * screenSizeRatio;
+    double rectLeftPx = rectLeft * screenSizeRatio / _scale;
+    double rectTopPx = rectTop * screenSizeRatio / _scale;
+    double paddingPx = padding * screenSizeRatio / _scale;
 
     // use compute() not to block UI update
     final cropResult = await compute(
@@ -467,8 +466,8 @@ class _CropEditorState extends State<_CropEditor> {
       [
         _targetImage!,
         Rect.fromLTWH(
-          rectLeftPx,
-          rectTopPx,
+          rectLeftPx - paddingPx,
+          rectTopPx - paddingPx,
           (rectLeftPx > paddingPx
                   ? _rect.width
                   : _rect.width - padding + rectLeft) *
@@ -515,12 +514,13 @@ class _CropEditorState extends State<_CropEditor> {
                               widget.image,
                               width: _isFitVertically
                                   ? null
-                                  : MediaQuery.of(context).size.width * _scale +
-                                      2 * widget.padding * _scale,
+                                  : (MediaQuery.of(context).size.width -
+                                          widget.padding * 2 * _scale) *
+                                      _scale,
                               height: _isFitVertically
-                                  ? MediaQuery.of(context).size.height *
-                                          _scale +
-                                      2 * widget.padding * _scale
+                                  ? (MediaQuery.of(context).size.height -
+                                          widget.padding * 2 * _scale) *
+                                      _scale
                                   : null,
                               fit: BoxFit.contain,
                             ),
