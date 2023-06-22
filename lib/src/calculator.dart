@@ -185,14 +185,14 @@ abstract class _Calculator {
       Rect imageRect, double? aspectRatio) {
     final newRight =
         min(imageRect.right, max(original.right + deltaX, original.left + 40));
-    final newBottom =
-        max(min(original.bottom + deltaY, imageRect.bottom), original.top + 40);
+    final newBottom = max(min(original.bottom + deltaY, imageRect.bottom),
+        original.top + 40 + 36);
     if (aspectRatio == null) {
       return Rect.fromLTRB(
         original.left,
         original.top,
         newRight,
-        newBottom + 36,
+        newBottom,
       );
     } else {
       if (deltaX.abs() > deltaY.abs()) {
