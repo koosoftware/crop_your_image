@@ -474,11 +474,11 @@ class _CropEditorState extends State<_CropEditor> {
               ? (rectTopPx - paddingPx) * _scale
               : rectTopPx - paddingPx,
           (rectLeftPx > paddingPx
-                  ? _rect.width * _scale
+                  ? _rect.width
                   : _rect.width - padding + rectLeft) *
               screenSizeRatio,
           (rectTopPx > paddingPx
-                  ? _rect.height * _scale
+                  ? _rect.height
                   : _rect.height - padding + rectTop) *
               screenSizeRatio,
         ),
