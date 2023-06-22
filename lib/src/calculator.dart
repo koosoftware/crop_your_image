@@ -185,8 +185,8 @@ abstract class _Calculator {
       Rect imageRect, double? aspectRatio) {
     final newRight =
         min(imageRect.right, max(original.right + deltaX, original.left + 40));
-    final newBottom = max(min(original.bottom + deltaY, imageRect.bottom),
-        original.top + 40 + 36);
+    final newBottom = max(min(original.bottom + 36 + deltaY, imageRect.bottom),
+        original.top + 40);
     if (aspectRatio == null) {
       return Rect.fromLTRB(
         original.left,
