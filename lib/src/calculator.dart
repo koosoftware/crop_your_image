@@ -135,11 +135,12 @@ abstract class _Calculator {
 
   /// calculates [Rect] of the result of user moving the bottom-left dot.
   Rect moveBottomLeft(Rect original, double deltaX, double deltaY,
-      Rect imageRect, double? aspectRatio) {
+      Rect imageRect, double? aspectRatio, double padding, double scale) {
     final newLeft =
         max(imageRect.left, min(original.left + deltaX, original.right - 40));
-    final newBottom =
-        max(min(original.bottom + deltaY, imageRect.bottom), original.top + 40);
+    final newBottom = max(
+        min(original.bottom + deltaY, imageRect.bottom + padding * scale),
+        original.top + 40);
 
     if (aspectRatio == null) {
       return Rect.fromLTRB(
