@@ -458,8 +458,8 @@ class _CropEditorState extends State<_CropEditor> {
     double rectLeft = _rect.left - _imageRect.left;
     double rectTop = _rect.top - _imageRect.top;
 
-    double rectLeftPx = rectLeft * screenSizeRatio / _scale;
-    double rectTopPx = rectTop * screenSizeRatio / _scale;
+    double rectLeftPx = rectLeft * screenSizeRatio;
+    double rectTopPx = rectTop * screenSizeRatio;
 
     // use compute() not to block UI update
     final cropResult = await compute(
