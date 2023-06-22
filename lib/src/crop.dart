@@ -468,7 +468,7 @@ class _CropEditorState extends State<_CropEditor> {
         _targetImage!,
         Rect.fromLTWH(
           rectLeftPx,
-          rectTopPx,
+          rectTopPx > paddingPx ? rectTopPx : rectTopPx - paddingPx,
           (rectLeftPx > paddingPx
                   ? _rect.width
                   : _rect.width - padding + rectLeft) *
@@ -480,6 +480,20 @@ class _CropEditorState extends State<_CropEditor> {
               screenSizeRatio /
               _scale,
         ),
+        /*Rect.fromLTWH(
+          rectLeftPx,
+          rectTopPx,
+          (rectLeftPx > paddingPx
+                  ? _rect.width
+                  : _rect.width - padding + rectLeft) *
+              screenSizeRatio /
+              _scale,
+          (rectTopPx > paddingPx
+                  ? _rect.height
+                  : _rect.height - padding + rectTop) *
+              screenSizeRatio /
+              _scale,
+        ),*/
       ],
     );
     widget.onCropped(cropResult);
