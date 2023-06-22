@@ -416,7 +416,7 @@ class _CropEditorState extends State<_CropEditor> {
 
     if (widget.interactive) {
       final initialScale = calculator.scaleToCover(screenSize, _imageRect);
-      _applyScale(initialScale);
+      _applyScale(1);
     }
   }
 
@@ -482,20 +482,6 @@ class _CropEditorState extends State<_CropEditor> {
                   : _rect.height - padding + rectTop) *
               screenSizeRatio,
         ),
-        /*Rect.fromLTWH(
-          rectLeftPx,
-          rectTopPx,
-          (rectLeftPx > paddingPx
-                  ? _rect.width
-                  : _rect.width - padding + rectLeft) *
-              screenSizeRatio /
-              _scale,
-          (rectTopPx > paddingPx
-                  ? _rect.height
-                  : _rect.height - padding + rectTop) *
-              screenSizeRatio /
-              _scale,
-        ),*/
       ],
     );
     widget.onCropped(cropResult);
