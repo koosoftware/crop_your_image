@@ -453,7 +453,7 @@ class _CropEditorState extends State<_CropEditor> {
     widget.onStatusChanged?.call(CropStatus.cropping);
 
     double padding = widget.padding;
-    double paddingPx = padding * screenSizeRatio / _scale;
+    double paddingPx = padding * screenSizeRatio;
 
     double rectLeft = _rect.left - _imageRect.left;
     double rectTop = _rect.top - _imageRect.top;
