@@ -241,7 +241,7 @@ class _CropEditorState extends State<_CropEditor> {
     double targetImageWidth = _targetImage!.width / screenSizeRatio * _scale;
     double targetImageWidthWithPadding =
         (targetImageWidth + widget.padding * 2) * _scale;
-    double newImageRectWidth = _imageRect.width;
+    double newImageRectWidth = _imageRect.width * _scale;
     double widthDiff = newImageRectWidth - targetImageWidthWithPadding;
     double finalNewImageRectWidth = newImageRectWidth - widthDiff;
 
@@ -249,7 +249,7 @@ class _CropEditorState extends State<_CropEditor> {
     double targetImageHeight = _targetImage!.height / screenSizeRatio * _scale;
     double targetImageHeightWithPadding =
         (targetImageHeight + widget.padding * 2) * _scale;
-    double newImageRectHeight = _imageRect.height;
+    double newImageRectHeight = _imageRect.height * _scale;
     double heightDiff = newImageRectHeight - targetImageHeightWithPadding;
     double finalNewImageRectHeight = newImageRectHeight - heightDiff;
 
