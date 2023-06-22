@@ -267,7 +267,7 @@ class _HorizontalCalculator extends _Calculator {
       (screenSize.width - initialSize.width) / 2,
       (screenSize.height - initialSize.height) / 2,
       initialSize.width,
-      initialSize.height,
+      initialSize.height + 36,
     );
   }
 

@@ -328,7 +328,7 @@ class _CropEditorState extends State<_CropEditor> {
         newLeft,
         newTop,
         newLeft + newWidth,
-        newTop + newHeight + 36,
+        newTop + newHeight,
       );
       _scale = nextScale;
     });
