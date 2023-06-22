@@ -420,7 +420,7 @@ class _CropEditorState extends State<_CropEditor> {
       double initScale =
           (screenSize.width + widget.padding * 2) / screenSize.width;
 
-      _applyScale(initScale);
+      _applyScale(1);
     }
   }
 
