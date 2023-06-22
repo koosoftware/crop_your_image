@@ -9,8 +9,8 @@ abstract class _Calculator {
       Size screenSize, double imageRatio, double padding, double scale);
 
   /// calculates [Rect] of initial cropping area.
-  Rect initialCropRect(Size screenSize, Rect imageRect, double aspectRatio,
-      double sizeRatio, double padding);
+  Rect initialCropRect(
+      Size screenSize, Rect imageRect, double aspectRatio, double sizeRatio);
 
   /// calculates initial scale of image to cover _CropEditor
   double scaleToCover(Size screenSize, Rect imageRect);
@@ -252,8 +252,8 @@ class _HorizontalCalculator extends _Calculator {
   }
 
   @override
-  Rect initialCropRect(Size screenSize, Rect imageRect, double aspectRatio,
-      double sizeRatio, double padding) {
+  Rect initialCropRect(
+      Size screenSize, Rect imageRect, double aspectRatio, double sizeRatio) {
     final imageRatio = imageRect.width / imageRect.height;
     final imageScreenHeight = screenSize.width / imageRatio;
 
@@ -267,7 +267,7 @@ class _HorizontalCalculator extends _Calculator {
       (screenSize.width - initialSize.width) / 2,
       (screenSize.height - initialSize.height) / 2,
       initialSize.width,
-      initialSize.height + padding,
+      initialSize.height,
     );
   }
 
@@ -296,8 +296,8 @@ class _VerticalCalculator extends _Calculator {
   }
 
   @override
-  Rect initialCropRect(Size screenSize, Rect imageRect, double aspectRatio,
-      double sizeRatio, double padding) {
+  Rect initialCropRect(
+      Size screenSize, Rect imageRect, double aspectRatio, double sizeRatio) {
     final imageRatio = imageRect.width / imageRect.height;
     final imageScreenWidth = screenSize.height * imageRatio;
 
@@ -311,7 +311,7 @@ class _VerticalCalculator extends _Calculator {
       (screenSize.width - initialSize.width) / 2,
       (screenSize.height - initialSize.height) / 2,
       initialSize.width,
-      initialSize.height + padding,
+      initialSize.height,
     );
   }
 

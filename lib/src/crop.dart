@@ -430,7 +430,6 @@ class _CropEditorState extends State<_CropEditor> {
         _imageRect,
         _aspectRatio ?? 1,
         widget.initialSize ?? 1,
-        widget.padding,
       );
     } else {
       final screenSizeRatio = calculator.screenSizeRatio(
