@@ -639,6 +639,8 @@ class _CropEditorState extends State<_CropEditor> {
                             details.delta.dy,
                             _imageRect,
                             _aspectRatio,
+                            widget.padding,
+                            _scale,
                           );
                         },
                   child: widget.cornerDotBuilder
