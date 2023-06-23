@@ -423,7 +423,7 @@ class _CropEditorState extends State<_CropEditor> {
         _imageRect,
         widget.padding,
       );
-      _applyScale(initialScale);
+      _applyScale(1);
     }
   }
 
