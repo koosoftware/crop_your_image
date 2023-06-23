@@ -289,8 +289,7 @@ class _VerticalCalculator extends _Calculator {
     final imageScreenWidth = screenSize.height * imageRatio + padding;
     final left = (screenSize.width - imageScreenWidth) / 2;
     final right = left + imageScreenWidth;
-    return Rect.fromLTWH(
-        left - padding * 2, 0, right - left, screenSize.height);
+    return Rect.fromLTWH(left, 0, right - left, screenSize.height);
   }
 
   @override
