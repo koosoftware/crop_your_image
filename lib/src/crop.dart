@@ -397,10 +397,11 @@ class _CropEditorState extends State<_CropEditor> {
   void _resetCroppingArea() {
     final screenSize = MediaQuery.of(context).size;
 
-    final imageRatio = _targetImage!.width / _targetImage!.height;
+    final imageRatio = (_targetImage!.width + widget.padding * 2) /
+        (_targetImage!.height + widget.padding * 2);
     _isFitVertically = imageRatio < screenSize.aspectRatio;
 
-    _imageRect = calculator.imageRect(screenSize, imageRatio, widget.padding);
+    _imageRect = calculator.imageRect(screenSize, imageRatio);
 
     if (widget.initialAreaBuilder != null) {
       rect = widget.initialAreaBuilder!(Rect.fromLTWH(
