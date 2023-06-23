@@ -395,10 +395,13 @@ class _CropEditorState extends State<_CropEditor> {
 
   /// reset [Rect] of cropping area with current state
   void _resetCroppingArea() {
-    final screenSize = MediaQuery.of(context).size;
+    //final screenSize = MediaQuery.of(context).size;
+    final screenSize = Size(
+      MediaQuery.of(context).size.width - widget.padding * 2,
+      MediaQuery.of(context).size.height - widget.padding * 2,
+    );
 
-    final imageRatio = (_targetImage!.width + widget.padding * 2) /
-        (_targetImage!.height + widget.padding * 2);
+    final imageRatio = _targetImage!.width / _targetImage!.height;
     _isFitVertically = imageRatio < screenSize.aspectRatio;
 
     _imageRect = calculator.imageRect(screenSize, imageRatio);

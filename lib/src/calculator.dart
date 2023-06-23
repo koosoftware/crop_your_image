@@ -271,7 +271,7 @@ class _HorizontalCalculator extends _Calculator {
 
   @override
   double scaleToCover(Size screenSize, Rect imageRect, double padding) {
-    return screenSize.height / (imageRect.height + padding * 2);
+    return (screenSize.height - padding * 2) / imageRect.height;
   }
 
   @override
@@ -314,7 +314,7 @@ class _VerticalCalculator extends _Calculator {
 
   @override
   double scaleToCover(Size screenSize, Rect imageRect, double padding) {
-    return screenSize.width / (imageRect.width + padding * 2);
+    return (screenSize.width - padding * 2) / imageRect.width;
   }
 
   @override
