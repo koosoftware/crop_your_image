@@ -416,7 +416,7 @@ class _CropEditorState extends State<_CropEditor> {
 
     if (widget.interactive) {
       final initialScale = calculator.scaleToCover(screenSize, _imageRect);
-      _applyScale(initialScale);
+      _applyScale(1);
     }
   }
 
@@ -599,6 +599,7 @@ class _CropEditorState extends State<_CropEditor> {
                             details.delta.dy,
                             _imageRect,
                             _aspectRatio,
+                            widget.padding * _scale,
                           );
                         },
                   child: widget.cornerDotBuilder
