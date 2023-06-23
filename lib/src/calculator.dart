@@ -243,8 +243,8 @@ class _HorizontalCalculator extends _Calculator {
 
   @override
   Rect imageRect(Size screenSize, double imageRatio, double padding) {
-    double screenSizeWidth = screenSize.width - padding;
-    double screenSizeHeight = screenSize.height - padding;
+    double screenSizeWidth = screenSize.width + padding;
+    double screenSizeHeight = screenSize.height + padding;
 
     final imageScreenHeight = screenSizeWidth / imageRatio;
     final top = (screenSizeHeight - imageScreenHeight) / 2;
@@ -289,8 +289,8 @@ class _VerticalCalculator extends _Calculator {
 
   @override
   Rect imageRect(Size screenSize, double imageRatio, double padding) {
-    double screenSizeWidth = screenSize.width - padding;
-    double screenSizeHeight = screenSize.height - padding;
+    double screenSizeWidth = screenSize.width + padding;
+    double screenSizeHeight = screenSize.height + padding;
 
     final imageScreenWidth = screenSizeHeight * imageRatio;
     final left = (screenSizeWidth - imageScreenWidth) / 2;
