@@ -12,7 +12,7 @@ abstract class _Calculator {
       Size screenSize, Rect imageRect, double aspectRatio, double sizeRatio);
 
   /// calculates initial scale of image to cover _CropEditor
-  double scaleToCover(Size screenSize, Rect imageRect, double padding);
+  double scaleToCover(Size screenSize, Rect imageRect);
 
   /// calculates ratio of [targetImage] and [screenSize]
   double screenSizeRatio(
@@ -270,8 +270,8 @@ class _HorizontalCalculator extends _Calculator {
   }
 
   @override
-  double scaleToCover(Size screenSize, Rect imageRect, double padding) {
-    return screenSize.height / (imageRect.height + padding * 2);
+  double scaleToCover(Size screenSize, Rect imageRect) {
+    return screenSize.height / imageRect.height;
   }
 
   @override
@@ -313,8 +313,8 @@ class _VerticalCalculator extends _Calculator {
   }
 
   @override
-  double scaleToCover(Size screenSize, Rect imageRect, double padding) {
-    return screenSize.width / (imageRect.width + padding * 2);
+  double scaleToCover(Size screenSize, Rect imageRect) {
+    return screenSize.width / imageRect.width;
   }
 
   @override
