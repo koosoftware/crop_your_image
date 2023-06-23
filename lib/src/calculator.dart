@@ -292,7 +292,7 @@ class _VerticalCalculator extends _Calculator {
 
     final realLeft = (screenSize.width - imageWidth) / 2;
 
-    return Rect.fromLTWH(realLeft, 0, right - realLeft, screenSize.height);
+    return Rect.fromLTWH(left, 0, right - left, screenSize.height);
   }
 
   @override
