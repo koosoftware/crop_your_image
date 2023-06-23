@@ -400,8 +400,7 @@ class _CropEditorState extends State<_CropEditor> {
     final imageRatio = _targetImage!.width / _targetImage!.height;
     _isFitVertically = imageRatio < screenSize.aspectRatio;
 
-    _imageRect =
-        calculator.imageRect(screenSize, imageRatio, widget.padding, 1);
+    _imageRect = calculator.imageRect(screenSize, imageRatio, widget.padding);
 
     if (widget.initialAreaBuilder != null) {
       rect = widget.initialAreaBuilder!(Rect.fromLTWH(
