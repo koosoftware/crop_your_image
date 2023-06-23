@@ -397,7 +397,8 @@ class _CropEditorState extends State<_CropEditor> {
   void _resetCroppingArea() {
     final screenSize = MediaQuery.of(context).size;
 
-    final imageRatio = _targetImage!.width / _targetImage!.height;
+    final imageRatio = (_targetImage!.width + widget.padding * 2) /
+        (_targetImage!.height + widget.padding * 2);
     _isFitVertically = imageRatio < screenSize.aspectRatio;
 
     _imageRect =
@@ -599,7 +600,6 @@ class _CropEditorState extends State<_CropEditor> {
                             details.delta.dy,
                             _imageRect,
                             _aspectRatio,
-                            widget.padding * _scale,
                           );
                         },
                   child: widget.cornerDotBuilder
