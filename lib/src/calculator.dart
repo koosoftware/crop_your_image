@@ -139,7 +139,7 @@ abstract class _Calculator {
     final newLeft =
         max(imageRect.left, min(original.left + deltaX, original.right - 40));
     final newBottom = max(
-        min(original.bottom + deltaY, imageRect.bottom + padding * scale),
+        min(original.bottom + deltaY, imageRect.bottom + padding * scale * 2),
         original.top + 40);
 
     if (aspectRatio == null) {
@@ -187,7 +187,7 @@ abstract class _Calculator {
     final newRight =
         min(imageRect.right, max(original.right + deltaX, original.left + 40));
     final newBottom = max(
-        min(original.bottom + deltaY, imageRect.bottom + padding * scale),
+        min(original.bottom + deltaY, imageRect.bottom + padding * scale * 2),
         original.top + 40);
     if (aspectRatio == null) {
       return Rect.fromLTRB(
