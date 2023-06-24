@@ -5,7 +5,8 @@ abstract class _Calculator {
   const _Calculator();
 
   /// calculates [Rect] of image to fit the screenSize.
-  Rect imageRect(Size screenSize, double imageWidth, double imageHeight);
+  Rect imageRect(
+      Size screenSize, double imageWidth, double imageHeight, double padding);
 
   /// calculates [Rect] of initial cropping area.
   Rect initialCropRect(
@@ -242,11 +243,15 @@ class _HorizontalCalculator extends _Calculator {
   const _HorizontalCalculator();
 
   @override
-  Rect imageRect(Size screenSize, double imageWidth, double imageHeight) {
-    final imageScreenHeight = screenSize.width / (imageWidth / imageHeight);
-    final top = (screenSize.height - imageScreenHeight) / 2;
+  Rect imageRect(
+      Size screenSize, double imageWidth, double imageHeight, double padding) {
+    final screenSizeWidth = screenSize.width - padding * 2;
+    final screenSizeHeight = screenSize.height - padding * 2;
+
+    final imageScreenHeight = screenSizeWidth / (imageWidth / imageHeight);
+    final top = (screenSizeHeight - imageScreenHeight) / 2;
     final bottom = top + imageScreenHeight;
-    return Rect.fromLTWH(0, top, screenSize.width, bottom - top);
+    return Rect.fromLTWH(0, top, screenSizeWidth, bottom - top);
   }
 
   @override
@@ -285,12 +290,16 @@ class _VerticalCalculator extends _Calculator {
   const _VerticalCalculator();
 
   @override
-  Rect imageRect(Size screenSize, double imageWidth, double imageHeight) {
-    final imageScreenWidth = screenSize.height * (imageWidth / imageHeight);
-    final left = (screenSize.width - imageScreenWidth) / 2;
+  Rect imageRect(
+      Size screenSize, double imageWidth, double imageHeight, double padding) {
+    final screenSizeWidth = screenSize.width - padding * 2;
+    final screenSizeHeight = screenSize.height - padding * 2;
+
+    final imageScreenWidth = screenSizeHeight * (imageWidth / imageHeight);
+    final left = (screenSizeWidth - imageScreenWidth) / 2;
     final right = left + imageScreenWidth;
 
-    return Rect.fromLTWH(left, 0, right - left, screenSize.height);
+    return Rect.fromLTWH(left, 0, right - left, screenSizeHeight);
   }
 
   @override
