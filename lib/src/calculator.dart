@@ -89,11 +89,12 @@ abstract class _Calculator {
 
   /// calculates [Rect] of the result of user moving the top-right dot.
   Rect moveTopRight(Rect original, double deltaX, double deltaY, Rect imageRect,
-      double? aspectRatio) {
+      double? aspectRatio, double padding, double scale) {
     final newTop =
         min(max(original.top + deltaY, imageRect.top), original.bottom - 40);
-    final newRight =
-        max(min(original.right + deltaX, imageRect.right), original.left + 40);
+    final newRight = max(
+        min(original.right + deltaX, imageRect.right + padding * scale * 2),
+        original.left + 40);
     if (aspectRatio == null) {
       return Rect.fromLTRB(
         original.left,
@@ -184,8 +185,8 @@ abstract class _Calculator {
   /// calculates [Rect] of the result of user moving the bottom-right dot.
   Rect moveBottomRight(Rect original, double deltaX, double deltaY,
       Rect imageRect, double? aspectRatio, double padding, double scale) {
-    final newRight =
-        min(imageRect.right, max(original.right + deltaX, original.left + 40));
+    final newRight = min(imageRect.right + padding * scale * 2,
+        max(original.right + deltaX, original.left + 40));
     final newBottom = max(
         min(original.bottom + deltaY, imageRect.bottom + padding * scale * 2),
         original.top + 40);

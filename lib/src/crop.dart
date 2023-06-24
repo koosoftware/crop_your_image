@@ -601,12 +601,13 @@ class _CropEditorState extends State<_CropEditor> {
                       ? null
                       : (details) {
                           rect = calculator.moveTopRight(
-                            _rect,
-                            details.delta.dx,
-                            details.delta.dy,
-                            _imageRect,
-                            _aspectRatio,
-                          );
+                              _rect,
+                              details.delta.dx,
+                              details.delta.dy,
+                              _imageRect,
+                              _aspectRatio,
+                              widget.padding,
+                              _scale);
                         },
                   child: widget.cornerDotBuilder
                           ?.call(dotTotalSize, EdgeAlignment.topRight) ??
