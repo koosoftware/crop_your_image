@@ -287,8 +287,7 @@ class _CropEditorState extends State<_CropEditor> {
   }) {
     late double baseHeight;
     late double baseWidth;
-    final ratio = (_targetImage!.height + widget.padding * 2) /
-        (_targetImage!.width + widget.padding * 2);
+    final ratio = _targetImage!.height / _targetImage!.width;
 
     if (_isFitVertically) {
       baseHeight = MediaQuery.of(context).size.height;
