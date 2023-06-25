@@ -323,7 +323,7 @@ class _CropEditorState extends State<_CropEditor> {
       return;
     }
     // apply
-    setState(() {
+    /*setState(() {
       _imageRect = Rect.fromLTRB(
         newLeft,
         newTop,
@@ -331,7 +331,7 @@ class _CropEditorState extends State<_CropEditor> {
         newTop + newHeight,
       );
       _scale = nextScale;
-    });
+    });*/
   }
 
   @override
@@ -400,12 +400,12 @@ class _CropEditorState extends State<_CropEditor> {
     final imageRatio = _targetImage!.width / _targetImage!.height;
     _isFitVertically = imageRatio < screenSize.aspectRatio;
 
-    /*_imageRect = calculator.imageRect(
+    _imageRect = calculator.imageRect(
       screenSize,
       _targetImage!.width + 0,
       _targetImage!.height + 0,
       widget.padding,
-    );*/
+    );
 
     if (widget.initialAreaBuilder != null) {
       rect = widget.initialAreaBuilder!(Rect.fromLTWH(
