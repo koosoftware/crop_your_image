@@ -319,10 +319,9 @@ class _CropEditorState extends State<_CropEditor> {
     final newTop = max(min(_rect.top, _imageRect.top - topPositionDelta),
         _rect.bottom - newHeight);
 
-    if ((newWidth < (_rect.width + widget.padding * 2)) ||
-        (newHeight < (_rect.height + widget.padding * 2))) {
+    /*if (newWidth < _rect.width || newHeight < _rect.height) {
       return;
-    }
+    }*/
     // apply
     setState(() {
       _imageRect = Rect.fromLTRB(
