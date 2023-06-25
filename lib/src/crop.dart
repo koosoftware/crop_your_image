@@ -325,7 +325,7 @@ class _CropEditorState extends State<_CropEditor> {
     // apply
     setState(() {
       _imageRect = Rect.fromLTRB(
-        newLeft,
+        newLeft + widget.padding * nextScale,
         newTop,
         newLeft + newWidth,
         newTop + newHeight,
