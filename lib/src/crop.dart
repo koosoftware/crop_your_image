@@ -315,11 +315,9 @@ class _CropEditorState extends State<_CropEditor> {
 
     // position
     final newLeft = max(min(_rect.left, _imageRect.left - leftPositionDelta),
-            _rect.right - newWidth) +
-        widget.padding;
+        _rect.right - newWidth);
     final newTop = max(min(_rect.top, _imageRect.top - topPositionDelta),
-            _rect.bottom - newHeight) +
-        widget.padding;
+        _rect.bottom - newHeight);
 
     if (newWidth < _rect.width || newHeight < _rect.height) {
       return;
@@ -402,12 +400,12 @@ class _CropEditorState extends State<_CropEditor> {
     final imageRatio = _targetImage!.width / _targetImage!.height;
     _isFitVertically = imageRatio < screenSize.aspectRatio;
 
-    _imageRect = calculator.imageRect(
+    /*_imageRect = calculator.imageRect(
       screenSize,
       _targetImage!.width + 0,
       _targetImage!.height + 0,
       widget.padding,
-    );
+    );*/
 
     if (widget.initialAreaBuilder != null) {
       rect = widget.initialAreaBuilder!(Rect.fromLTWH(
