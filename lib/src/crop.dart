@@ -290,15 +290,15 @@ class _CropEditorState extends State<_CropEditor> {
     final ratio = _targetImage!.height / _targetImage!.width;
 
     if (_isFitVertically) {
-      baseHeight = MediaQuery.of(context).size.height + widget.padding * 2;
+      baseHeight = MediaQuery.of(context).size.height;
       baseWidth = baseHeight / ratio;
     } else {
-      baseWidth = MediaQuery.of(context).size.width + widget.padding * 2;
+      baseWidth = MediaQuery.of(context).size.width;
       baseHeight = baseWidth * ratio;
     }
 
     // width
-    final newWidth = baseWidth * nextScale;
+    final newWidth = (baseWidth - widget.padding * 2) * nextScale;
     final horizontalFocalPointBias = focalPoint == null
         ? 0.5
         : (focalPoint.dx - _imageRect.left) / _imageRect.width;
@@ -306,7 +306,7 @@ class _CropEditorState extends State<_CropEditor> {
         (newWidth - _imageRect.width) * horizontalFocalPointBias;
 
     // height
-    final newHeight = baseHeight * nextScale;
+    final newHeight = (baseHeight - widget.padding * 2) * nextScale;
     final verticalFocalPointBias = focalPoint == null
         ? 0.5
         : (focalPoint.dy - _imageRect.top) / _imageRect.height;
