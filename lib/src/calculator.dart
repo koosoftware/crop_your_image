@@ -19,6 +19,7 @@ abstract class _Calculator {
     image.Image targetImage,
     Size screenSize,
     double padding,
+    double scale,
   );
 
   /// calculates [Rect] of the result of user moving the cropping area.
@@ -283,8 +284,9 @@ class _HorizontalCalculator extends _Calculator {
     image.Image targetImage,
     Size screenSize,
     double padding,
+    double scale,
   ) {
-    return (targetImage.width * padding * 2) / screenSize.width;
+    return ((targetImage.width * padding * 2) * scale) / screenSize.width;
   }
 }
 
@@ -329,7 +331,8 @@ class _VerticalCalculator extends _Calculator {
     image.Image targetImage,
     Size screenSize,
     double padding,
+    double scale,
   ) {
-    return (targetImage.height + padding * 2) / screenSize.height;
+    return ((targetImage.height + padding * 2) * scale) / screenSize.height;
   }
 }
