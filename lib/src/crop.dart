@@ -462,14 +462,23 @@ class _CropEditorState extends State<_CropEditor> {
 
     widget.onStatusChanged?.call(CropStatus.cropping);
 
+    double padding = widget.padding * _scale;
+    double paddingPx = padding * screenSizeRatio / _scale;
+
+    double rectLeft = _rect.left - _imageRect.left;
+    double rectTop = _rect.top - _imageRect.top;
+
+    double rectLeftPx = rectLeft * screenSizeRatio / _scale;
+    double rectTopPx = rectTop * screenSizeRatio / _scale;
+
     // use compute() not to block UI update
     final cropResult = await compute(
       withCircleShape ? _doCropCircle : _doCrop,
       [
         _targetImage!,
         Rect.fromLTWH(
-          (_rect.left - _imageRect.left) * screenSizeRatio / _scale,
-          (_rect.top - _imageRect.top) * screenSizeRatio / _scale,
+          rectLeftPx - paddingPx,
+          rectTopPx - paddingPx,
           _rect.width * screenSizeRatio / _scale,
           _rect.height * screenSizeRatio / _scale,
         ),
