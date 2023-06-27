@@ -234,8 +234,8 @@ class _CropEditorState extends State<_CropEditor> {
   }
 
   void _updateScale(ScaleUpdateDetails detail) {
-    final screenSizeRatio = calculator.screenSizeRatio(
-        _targetImage!, MediaQuery.of(context).size, widget.padding, _scale);
+    /*final screenSizeRatio = calculator.screenSizeRatio(
+        _targetImage!, MediaQuery.of(context).size, widget.padding, _scale);*/
 
     // calculate width offset
     /*double targetImageWidth =
@@ -256,13 +256,13 @@ class _CropEditorState extends State<_CropEditor> {
     double finalNewImageRectHeight = newImageRectHeight - heightDiff;*/
     // move
     var movedLeft = _imageRect.left + detail.focalPointDelta.dx;
-    if (movedLeft + _imageRect.width < _rect.right) {
-      movedLeft = _rect.right - _imageRect.width;
+    if (movedLeft + _imageRect.width + widget.padding < _rect.right) {
+      movedLeft = _rect.right - _imageRect.width + widget.padding;
     }
 
     var movedTop = _imageRect.top + detail.focalPointDelta.dy;
-    if (movedTop + _imageRect.height < _rect.bottom) {
-      movedTop = _rect.bottom - _imageRect.height;
+    if (movedTop + _imageRect.height + widget.padding < _rect.bottom) {
+      movedTop = _rect.bottom - _imageRect.height + widget.padding;
     }
     setState(() {
       _imageRect = Rect.fromLTWH(
