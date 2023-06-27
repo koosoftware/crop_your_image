@@ -248,7 +248,7 @@ class _HorizontalCalculator extends _Calculator {
     final finalScreenSizeWidth = screenSize.width;
 
     final imageScreenHeight = finalScreenSizeWidth / imageRatio;
-    final top = (screenSize.height - imageScreenHeight) / 2;
+    final top = (screenSize.height - (imageScreenHeight + padding * 2)) / 2;
     final bottom = top + imageScreenHeight;
     return Rect.fromLTWH(
         (padding * -1), top, finalScreenSizeWidth, bottom - top);
