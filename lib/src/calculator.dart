@@ -5,7 +5,7 @@ abstract class _Calculator {
   const _Calculator();
 
   /// calculates [Rect] of image to fit the screenSize.
-  Rect imageRect(Size screenSize, double imageRatio);
+  Rect imageRect(Size screenSize, double imageRatio, double padding);
 
   /// calculates [Rect] of initial cropping area.
   Rect initialCropRect(
@@ -244,7 +244,7 @@ class _HorizontalCalculator extends _Calculator {
   const _HorizontalCalculator();
 
   @override
-  Rect imageRect(Size screenSize, double imageRatio) {
+  Rect imageRect(Size screenSize, double imageRatio, double padding) {
     final imageScreenHeight = screenSize.width / imageRatio;
     final top = (screenSize.height - imageScreenHeight) / 2;
     final bottom = top + imageScreenHeight;
@@ -291,9 +291,9 @@ class _VerticalCalculator extends _Calculator {
   const _VerticalCalculator();
 
   @override
-  Rect imageRect(Size screenSize, double imageRatio) {
+  Rect imageRect(Size screenSize, double imageRatio, double padding) {
     final imageScreenWidth = screenSize.height * imageRatio;
-    final left = (screenSize.width - imageScreenWidth) / 2;
+    final left = ((screenSize.width - imageScreenWidth) / 2) - padding;
     final right = left + imageScreenWidth;
     return Rect.fromLTWH(left, 0, right - left, screenSize.height);
   }
