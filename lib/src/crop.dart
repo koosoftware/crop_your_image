@@ -322,7 +322,7 @@ class _CropEditorState extends State<_CropEditor> {
     final newLeft = max(min(_rect.left, _imageRect.left - leftPositionDelta),
         _rect.right - newWidth - widget.padding * 2);
     final newTop = max(min(_rect.top, _imageRect.top - topPositionDelta),
-        _rect.bottom - newHeight);
+        _rect.bottom - newHeight - widget.padding * 2);
 
     if (newWidth < _rect.width || newHeight < _rect.height) {
       return;
