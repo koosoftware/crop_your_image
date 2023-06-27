@@ -254,15 +254,19 @@ class _CropEditorState extends State<_CropEditor> {
     double newImageRectHeight = _imageRect.height * _scale;
     double heightDiff = newImageRectHeight - targetImageHeightWithPadding;
     double finalNewImageRectHeight = newImageRectHeight - heightDiff;*/
+
+    double finalNewImageRectWidth = _imageRect.width + widget.padding;
+    double finalNewImageRectHeight = _imageRect.height + widget.padding;
+
     // move
     var movedLeft = _imageRect.left + detail.focalPointDelta.dx;
-    if (movedLeft + _imageRect.width + widget.padding < _rect.right) {
-      movedLeft = _rect.right - _imageRect.width + widget.padding;
+    if (movedLeft + finalNewImageRectWidth < _rect.right) {
+      movedLeft = _rect.right - finalNewImageRectWidth;
     }
 
     var movedTop = _imageRect.top + detail.focalPointDelta.dy;
-    if (movedTop + _imageRect.height + widget.padding < _rect.bottom) {
-      movedTop = _rect.bottom - _imageRect.height + widget.padding;
+    if (movedTop + finalNewImageRectHeight < _rect.bottom) {
+      movedTop = _rect.bottom - finalNewImageRectHeight;
     }
     setState(() {
       _imageRect = Rect.fromLTWH(
