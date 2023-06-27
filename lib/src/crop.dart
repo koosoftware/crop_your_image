@@ -311,7 +311,7 @@ class _CropEditorState extends State<_CropEditor> {
         (newWidth - _imageRect.width) * horizontalFocalPointBias;
 
     // height
-    final newHeight = (baseHeight + widget.padding) * nextScale;
+    final newHeight = (baseHeight) * nextScale;
     final verticalFocalPointBias = focalPoint == null
         ? 0.5
         : (focalPoint.dy - _imageRect.top) / _imageRect.height;
