@@ -264,14 +264,14 @@ class _CropEditorState extends State<_CropEditor> {
     if (movedTop + finalNewImageRectHeight < _rect.bottom) {
       movedTop = _rect.bottom - finalNewImageRectHeight;
     }
-    setState(() {
+    /*setState(() {
       _imageRect = Rect.fromLTWH(
         min(_rect.left, movedLeft),
         min(_rect.top, movedTop),
         _imageRect.width,
         _imageRect.height,
       );
-    });
+    });*/
 
     // scale
     if (_pointerNum >= 2) {
