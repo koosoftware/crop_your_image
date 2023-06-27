@@ -477,10 +477,14 @@ class _CropEditorState extends State<_CropEditor> {
       [
         _targetImage!,
         Rect.fromLTWH(
-          rectLeftPx > paddingPx ? rectLeftPx - paddingPx : rectLeftPx,
-          rectTopPx > paddingPx ? rectTopPx - paddingPx : rectTopPx,
-          _rect.width * screenSizeRatio / _scale,
-          _rect.height * screenSizeRatio / _scale,
+          rectLeftPx - paddingPx,
+          rectTopPx - paddingPx,
+          (rectLeftPx > paddingPx ? _rect.width : _rect.width - padding) *
+              screenSizeRatio /
+              _scale,
+          (rectTopPx > paddingPx ? _rect.height : _rect.height - padding) *
+              screenSizeRatio /
+              _scale,
         ),
       ],
     );
