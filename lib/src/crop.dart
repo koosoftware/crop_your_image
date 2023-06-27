@@ -319,9 +319,10 @@ class _CropEditorState extends State<_CropEditor> {
         (newHeight - _imageRect.height) * verticalFocalPointBias;
 
     // position
-    final newLeft = max(min(_rect.left, _imageRect.left - leftPositionDelta),
-            _rect.right - newWidth) -
-        widget.padding * nextScale;
+    final newLeft = max(
+        min(_rect.left, _imageRect.left - leftPositionDelta) -
+            widget.padding * nextScale,
+        _rect.right - newWidth);
     final newTop = max(min(_rect.top, _imageRect.top - topPositionDelta),
         _rect.bottom - newHeight);
 
