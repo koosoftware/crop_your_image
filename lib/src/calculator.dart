@@ -245,7 +245,7 @@ class _HorizontalCalculator extends _Calculator {
 
   @override
   Rect imageRect(Size screenSize, double imageRatio, double padding) {
-    final finalScreenSizeWidth = screenSize.width + padding * 2;
+    final finalScreenSizeWidth = screenSize.width;
 
     final imageScreenHeight = finalScreenSizeWidth / imageRatio;
     final top = (screenSize.height - imageScreenHeight) / 2;
