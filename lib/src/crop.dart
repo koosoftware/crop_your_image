@@ -325,10 +325,10 @@ class _CropEditorState extends State<_CropEditor> {
         _rect.bottom - newHeight);
 
     if (newWidth < _rect.width || newHeight < _rect.height) {
-      //return;
+      return;
     }
     // apply
-    setState(() {
+    /*setState(() {
       _imageRect = Rect.fromLTRB(
         newLeft,
         newTop,
@@ -336,7 +336,7 @@ class _CropEditorState extends State<_CropEditor> {
         newTop + newHeight,
       );
       _scale = nextScale;
-    });
+    });*/
   }
 
   @override
