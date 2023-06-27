@@ -440,7 +440,6 @@ class _CropEditorState extends State<_CropEditor> {
         _targetImage!,
         MediaQuery.of(context).size,
         widget.padding,
-        _scale,
       );
       rect = Rect.fromLTWH(
         _imageRect.left + initialArea.left / screenSizeRatio,
@@ -459,7 +458,6 @@ class _CropEditorState extends State<_CropEditor> {
       _targetImage!,
       MediaQuery.of(context).size,
       widget.padding,
-      _scale,
     );
 
     widget.onStatusChanged?.call(CropStatus.cropping);
