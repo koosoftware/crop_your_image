@@ -303,7 +303,7 @@ class _CropEditorState extends State<_CropEditor> {
     }
 
     // width
-    final newWidth = (baseWidth + widget.padding) * nextScale;
+    final newWidth = baseWidth * nextScale;
     final horizontalFocalPointBias = focalPoint == null
         ? 0.5
         : (focalPoint.dx - _imageRect.left) / _imageRect.width;
@@ -311,7 +311,7 @@ class _CropEditorState extends State<_CropEditor> {
         (newWidth - _imageRect.width) * horizontalFocalPointBias;
 
     // height
-    final newHeight = (baseHeight + widget.padding) * nextScale;
+    final newHeight = baseHeight * nextScale;
     final verticalFocalPointBias = focalPoint == null
         ? 0.5
         : (focalPoint.dy - _imageRect.top) / _imageRect.height;
@@ -420,7 +420,7 @@ class _CropEditorState extends State<_CropEditor> {
 
     if (widget.interactive) {
       final initialScale = calculator.scaleToCover(screenSize, _imageRect);
-      //_applyScale(1);
+      _applyScale(1);
     }
   }
 
