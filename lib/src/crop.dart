@@ -238,31 +238,31 @@ class _CropEditorState extends State<_CropEditor> {
         _targetImage!, MediaQuery.of(context).size, widget.padding, _scale);
 
     // calculate width offset
-    double targetImageWidth =
+    /*double targetImageWidth =
         (_targetImage!.width * widget.padding * 2) / screenSizeRatio;
     double targetImageWidthWithPadding =
         targetImageWidth + widget.padding * 2 * _scale;
     double newImageRectWidth = _imageRect.width * _scale;
     double widthDiff = newImageRectWidth - targetImageWidthWithPadding;
-    double finalNewImageRectWidth = newImageRectWidth - widthDiff;
+    double finalNewImageRectWidth = newImageRectWidth - widthDiff;*/
 
     // calculate height offset
-    double targetImageHeight =
+    /*double targetImageHeight =
         (_targetImage!.height * widget.padding * 2) / screenSizeRatio;
     double targetImageHeightWithPadding =
         targetImageHeight + widget.padding * 2 * _scale;
     double newImageRectHeight = _imageRect.height * _scale;
     double heightDiff = newImageRectHeight - targetImageHeightWithPadding;
-    double finalNewImageRectHeight = newImageRectHeight - heightDiff;
+    double finalNewImageRectHeight = newImageRectHeight - heightDiff;*/
     // move
     var movedLeft = _imageRect.left + detail.focalPointDelta.dx;
-    if (movedLeft + finalNewImageRectWidth < _rect.right) {
-      movedLeft = _rect.right - finalNewImageRectWidth;
+    if (movedLeft + _imageRect.width < _rect.right) {
+      movedLeft = _rect.right - _imageRect.width;
     }
 
     var movedTop = _imageRect.top + detail.focalPointDelta.dy;
-    if (movedTop + finalNewImageRectHeight < _rect.bottom) {
-      movedTop = _rect.bottom - finalNewImageRectHeight;
+    if (movedTop + _imageRect.height < _rect.bottom) {
+      movedTop = _rect.bottom - _imageRect.height;
     }
     setState(() {
       _imageRect = Rect.fromLTWH(
