@@ -234,34 +234,15 @@ class _CropEditorState extends State<_CropEditor> {
   }
 
   void _updateScale(ScaleUpdateDetails detail) {
-    final screenSizeRatio = calculator.screenSizeRatio(
-        _targetImage!, MediaQuery.of(context).size, widget.padding, _scale);
-
-    // calculate width offset
-    double targetImageWidth = _targetImage!.width / screenSizeRatio;
-    double targetImageWidthWithPadding =
-        targetImageWidth + widget.padding * 2 * _scale;
-    double newImageRectWidth = _imageRect.width * _scale;
-    double widthDiff = newImageRectWidth - targetImageWidthWithPadding;
-    double finalNewImageRectWidth = newImageRectWidth - widthDiff;
-
-    // calculate height offset
-    double targetImageHeight = _targetImage!.height / screenSizeRatio;
-    double targetImageHeightWithPadding =
-        targetImageHeight + widget.padding * 2 * _scale;
-    double newImageRectHeight = _imageRect.height * _scale;
-    double heightDiff = newImageRectHeight - targetImageHeightWithPadding;
-    double finalNewImageRectHeight = newImageRectHeight - heightDiff;
-
     // move
     var movedLeft = _imageRect.left + detail.focalPointDelta.dx;
-    if (movedLeft + finalNewImageRectWidth < _rect.right) {
-      movedLeft = _rect.right - finalNewImageRectWidth;
+    if (movedLeft + _imageRect.width < _rect.right) {
+      movedLeft = _rect.right - _imageRect.width;
     }
 
     var movedTop = _imageRect.top + detail.focalPointDelta.dy;
-    if (movedTop + finalNewImageRectHeight < _rect.bottom) {
-      movedTop = _rect.bottom - finalNewImageRectHeight;
+    if (movedTop + _imageRect.height < _rect.bottom) {
+      movedTop = _rect.bottom - _imageRect.height;
     }
     setState(() {
       _imageRect = Rect.fromLTWH(
@@ -287,8 +268,7 @@ class _CropEditorState extends State<_CropEditor> {
   }) {
     late double baseHeight;
     late double baseWidth;
-    final ratio = ((_targetImage!.height + widget.padding * 2) * nextScale) /
-        ((_targetImage!.width + widget.padding * 2) * nextScale);
+    final ratio = _targetImage!.height / _targetImage!.width;
 
     if (_isFitVertically) {
       baseHeight = MediaQuery.of(context).size.height;
@@ -401,12 +381,7 @@ class _CropEditorState extends State<_CropEditor> {
     final imageRatio = _targetImage!.width / _targetImage!.height;
     _isFitVertically = imageRatio < screenSize.aspectRatio;
 
-    _imageRect = calculator.imageRect(
-      screenSize,
-      _targetImage!.width + 0,
-      _targetImage!.height + 0,
-      widget.padding,
-    );
+    _imageRect = calculator.imageRect(screenSize, imageRatio);
 
     if (widget.initialAreaBuilder != null) {
       rect = widget.initialAreaBuilder!(Rect.fromLTWH(
@@ -420,10 +395,7 @@ class _CropEditorState extends State<_CropEditor> {
     }
 
     if (widget.interactive) {
-      final initialScale = calculator.scaleToCover(
-        screenSize,
-        _imageRect,
-      );
+      final initialScale = calculator.scaleToCover(screenSize, _imageRect);
       _applyScale(1);
     }
   }
@@ -441,7 +413,9 @@ class _CropEditorState extends State<_CropEditor> {
       );
     } else {
       final screenSizeRatio = calculator.screenSizeRatio(
-          _targetImage!, MediaQuery.of(context).size, widget.padding, _scale);
+        _targetImage!,
+        MediaQuery.of(context).size,
+      );
       rect = Rect.fromLTWH(
         _imageRect.left + initialArea.left / screenSizeRatio,
         _imageRect.top + initialArea.top / screenSizeRatio,
@@ -456,7 +430,9 @@ class _CropEditorState extends State<_CropEditor> {
     assert(_targetImage != null);
 
     final screenSizeRatio = calculator.screenSizeRatio(
-        _targetImage!, MediaQuery.of(context).size, widget.padding, _scale);
+      _targetImage!,
+      MediaQuery.of(context).size,
+    );
 
     widget.onStatusChanged?.call(CropStatus.cropping);
 
@@ -525,9 +501,9 @@ class _CropEditorState extends State<_CropEditor> {
                               widget.image,
                               width: _isFitVertically
                                   ? null
-                                  : MediaQuery.of(context).size.width,
+                                  : MediaQuery.of(context).size.width * _scale,
                               height: _isFitVertically
-                                  ? MediaQuery.of(context).size.height
+                                  ? MediaQuery.of(context).size.height * _scale
                                   : null,
                               fit: BoxFit.contain,
                             ),
@@ -598,13 +574,12 @@ class _CropEditorState extends State<_CropEditor> {
                       ? null
                       : (details) {
                           rect = calculator.moveTopRight(
-                              _rect,
-                              details.delta.dx,
-                              details.delta.dy,
-                              _imageRect,
-                              _aspectRatio,
-                              widget.padding,
-                              _scale);
+                            _rect,
+                            details.delta.dx,
+                            details.delta.dy,
+                            _imageRect,
+                            _aspectRatio,
+                          );
                         },
                   child: widget.cornerDotBuilder
                           ?.call(dotTotalSize, EdgeAlignment.topRight) ??
@@ -624,8 +599,6 @@ class _CropEditorState extends State<_CropEditor> {
                             details.delta.dy,
                             _imageRect,
                             _aspectRatio,
-                            widget.padding,
-                            _scale,
                           );
                         },
                   child: widget.cornerDotBuilder
@@ -646,8 +619,6 @@ class _CropEditorState extends State<_CropEditor> {
                             details.delta.dy,
                             _imageRect,
                             _aspectRatio,
-                            widget.padding,
-                            _scale,
                           );
                         },
                   child: widget.cornerDotBuilder
