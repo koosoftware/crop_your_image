@@ -315,7 +315,8 @@ class _CropEditorState extends State<_CropEditor> {
 
     // position
     final newLeft = max(min(_rect.left, _imageRect.left - leftPositionDelta),
-        _rect.right - newWidth);
+            _rect.right - newWidth) -
+        widget.padding;
     final newTop = max(min(_rect.top, _imageRect.top - topPositionDelta),
         _rect.bottom - newHeight);
 
@@ -416,7 +417,7 @@ class _CropEditorState extends State<_CropEditor> {
 
     if (widget.interactive) {
       final initialScale = calculator.scaleToCover(screenSize, _imageRect);
-      _applyScale(initialScale);
+      _applyScale(1);
     }
   }
 
