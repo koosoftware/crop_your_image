@@ -327,7 +327,7 @@ class _CropEditorState extends State<_CropEditor> {
         _rect.bottom - newHeight - widget.padding * 2);
 
     if (newWidth < _rect.width || newHeight < _rect.height) {
-      return;
+      //return;
     }
     // apply
     setState(() {
